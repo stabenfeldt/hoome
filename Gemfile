@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'solidus'
+gem 'solidus', :path => "/Users/martins/Work/Hoome/solidus"
 gem 'solidus_auth_devise'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
