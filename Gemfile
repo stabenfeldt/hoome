@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'solidus', :path => '/Users/martins/Work/Hoome/solidus',  :branch => 'feature/multi-vendor'
+gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'feature/multi-vendor'
 gem 'solidus_auth_devise'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
