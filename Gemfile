@@ -3,6 +3,11 @@ source 'https://rubygems.org'
 gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'feature/multi-vendor'
 gem 'solidus_auth_devise'
 
+group :development, :test do
+  gem 'fabrication'
+  gem 'rspec-rails', '~> 3.0'
+end
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use sqlite3 as the database for Active Record
