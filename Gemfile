@@ -3,10 +3,9 @@ source 'https://rubygems.org'
 gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'feature/multi-vendor'
 gem 'solidus_auth_devise'
 
-group :development, :test do
-  gem 'fabrication'
-  gem 'rspec-rails', '~> 3.0'
-end
+#group :development, :test do
+#  gem 'fabrication'
+#end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -38,6 +37,25 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+#
+group :test do
+  gem 'capybara', '~> 2.4'
+  gem 'capybara-screenshot'
+  gem 'database_cleaner', '~> 1.3'
+  gem 'email_spec'
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'launchy'
+  gem 'rspec-activemodel-mocks', '~>1.0.2'
+  gem 'rspec-collection_matchers'
+  gem 'rspec-its'
+  gem 'rspec-rails', '~> 3.3.0'
+  gem 'simplecov'
+  gem 'webmock', '1.8.11'
+  gem 'poltergeist'
+  gem 'timecop'
+  gem 'with_model'
+  gem 'rspec_junit_formatter'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
