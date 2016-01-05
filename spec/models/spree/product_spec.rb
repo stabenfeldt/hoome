@@ -130,7 +130,7 @@ describe Spree::Product, :type => :model do
       end
     end
 
-    context '#items_belonging_to_user' do
+    context '#items_belonging_to_user', focus: true do
         let(:product)          { create(:product) }
         let(:another_product)  { create(:product) }
         let(:user)             { create(:user) }
