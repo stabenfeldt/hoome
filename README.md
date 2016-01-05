@@ -5,6 +5,12 @@ bundle
 rake db:create db:migrate
 bundle exec rails g spree:install
 
+**Create a vendor role**
+```
+$ r c
+Spree::Role.create(name: 'vendor')
+```
+
 rails server
 
 *Admin account*
