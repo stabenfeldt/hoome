@@ -131,16 +131,15 @@ describe Spree::Product, :type => :model do
     end
 
     context '#items_belonging_to_user' do
-        let(:product)        { create(:product) }
-        let(:user)           { create(:user) }
-        let(:variant)        { product.master }
-        let(:stock_location) { create(:stock_location) }
-        let(:stock_item)     { variant.stock_items.first }
+        let(:product)          { create(:product) }
+        let(:another_product)  { create(:product) }
+        let(:user)             { create(:user) }
+        let(:stock_location)   { create(:stock_location) }
 
       it 'returns only products that belong to the same stock location as the user' do
         user.stock_location_ids = [stock_location.id]
         product.master.stock_location_ids = [stock_location.id]
-        expect( Spree::Product.items_belonging_to_user(user).first).to eq product
+        expect( Spree::Product.items_belonging_to_user(user).all).to eq [product]
       end
     end
 
