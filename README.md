@@ -1,5 +1,13 @@
 # Hoome
 
+## Goals for the Alpha version
+
+* A vendor can add hit own products
+* A vendor can only access /admin/products. The rest of the admin interface is hidden.
+* The admin gets an email when a product is sold. He then emails the vendor regarding which product is sold to whom.
+  The vendor prepares the product and informs the admin that it's ready to be picked up.
+  The admin transfers the money the customer payed, to the vendor 14 days after the product is delivered to the customer.
+
 ### Install
 bundle
 rake db:create db:migrate
