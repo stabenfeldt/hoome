@@ -32,6 +32,9 @@ password: test123
 
 
 ## Solidus
+
+Customice the app my modifiying config/initializers/spree.rb
+
 ### Running tests
 ```
 cd solidus
