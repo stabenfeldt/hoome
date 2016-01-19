@@ -16,10 +16,9 @@ describe Spree::PermissionSets::MultiVendor do
     end
 
     context "when the user is associated with the stock location" do
-      #it { is_expected.to be_able_to(:admin,   :all) }
-      #it { is_expected.to be_able_to(:create,  :all) }
-      #it { is_expected.to be_able_to(:display, :all) }
       it { is_expected.to be_able_to(:manage,  Spree::StockItem) }
+      it { is_expected.to be_able_to(:manage,  Spree::Image) }
+      it { is_expected.to be_able_to(:manage,  Spree::Product) }
     end
 
     context "when the user is not associated with the stock location" do
