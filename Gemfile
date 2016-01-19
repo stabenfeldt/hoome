@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'solidus', :path => 'https://github.com/stabenfeldt/solidus',  :branch => 'feature/multi-vendor'
+gem 'solidus', :git => 'https://github.com/stabenfeldt/solidus',  :branch => 'feature/multi-vendor'
 gem 'solidus_auth_devise'
 
 #group :development, :test do
