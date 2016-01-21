@@ -9,16 +9,6 @@ require 'spree/core'
 module Dummy
   class Application < Rails::Application
 
-		config.action_mailer.delivery_method = :smtp
-		config.action_mailer.smtp_settings = {
-			address:              'smtp.gmail.com',
-      port:                 587,
-      domain:               ENV['SMTP_DOMAIN'],
-      user_name:            ENV['SMTP_USERNAME'],
-      password:             ENV['SMTP_PASSWORD'],
-      authentication:       'plain',
-      enable_starttls_auto: true
-		}
 
     config.to_prepare do
       # Load application's model / class decorators
