@@ -13,6 +13,9 @@ gem 'solidus_auth_devise'
 gem 'rails', '4.2.5'
 gem 'rails_12factor'
 gem 'pg'
+
+gem 'aws-sdk'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
