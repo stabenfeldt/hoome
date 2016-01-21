@@ -5,10 +5,6 @@ ruby '2.2.3'
 gem 'solidus', :git => 'https://github.com/stabenfeldt/solidus',  :branch => 'feature/multi-vendor'
 gem 'solidus_auth_devise'
 
-#group :development, :test do
-#  gem 'fabrication'
-#end
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 gem 'rails_12factor'
@@ -41,9 +37,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-#
 group :test do
   gem 'capybara', '~> 2.4'
   gem 'capybara-screenshot'
@@ -66,6 +59,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -75,6 +69,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
 
 group :production do
   gem 'exception_notification'
