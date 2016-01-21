@@ -18,3 +18,5 @@ public/spree
 !/log/.keep
 /tmp
 .byebug_history
+
+.env
