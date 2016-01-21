@@ -14,7 +14,8 @@ gem 'rails', '4.2.5'
 gem 'rails_12factor'
 gem 'pg'
 
-gem 'aws-sdk'
+
+gem 'aws-sdk', '~> 1.5.7' # Amazon Web Sevices for attachments (Must be at this version for paperclip support, not v2)
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
