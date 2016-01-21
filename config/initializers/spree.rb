@@ -13,7 +13,7 @@ Spree.config do |config|
   config.currency = "NOK"
 
   # from address for transactional emails
-  config.mails_from = "store@example.com"
+  config.mails_from = "martin@stabenfeldt.net"
 
   # Uncomment to stop tracking inventory levels in the application
   # config.track_inventory_levels = false
@@ -56,7 +56,7 @@ Spree.config do |config|
 	  s3_credentials: {
 	    access_key_id:     ENV['AWS_ACCESS_KEY_ID'],
 	    secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-	    bucket:            ENV['S3_BUCKET_NAME']
+      bucket:            "#{ENV['S3_BUCKET_NAME']}-#{Rails.env}"
 	  },
 
 	  storage:        :s3,
