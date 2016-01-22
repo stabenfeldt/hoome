@@ -2,15 +2,20 @@ source 'https://rubygems.org'
 ruby '2.2.3'
 
 
-#gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'feature/multi-vendor'
-gem 'solidus', :git => 'https://github.com/stabenfeldt/solidus',  :branch => 'feature/multi-vendor'
+#gem 'solidus', :git => 'https://github.com/stabenfeldt/solidus',  :branch => 'feature/multi-vendor'
+gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'master'
+#gem 'solidus', github: 'solidusio/solidus'
 
 gem 'solidus_auth_devise'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 gem 'rails_12factor'
 gem 'pg'
+
+gem 'cancancan', '~> 1.10'
+
 
 
 gem 'aws-sdk', '~> 1.5.7' # Amazon Web Sevices for attachments (Must be at this version for paperclip support, not v2)
