@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module Hoome
   class Application < Rails::Application
+
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]  # include all subdirectories
+
 		config.action_mailer.delivery_method = :smtp
 		config.action_mailer.smtp_settings = {
 			address:              'smtp.gmail.com',
