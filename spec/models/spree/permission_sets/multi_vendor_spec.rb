@@ -13,12 +13,18 @@ describe Spree::PermissionSets::MultiVendor do
     before do
       user.stock_locations = [stock_location]
       described_class.new(ability).activate!
+
+      product.master.stock_location_ids = [stock_location.id]
+      product.master.save
+      product.save
+      product.reload
+      product.master.reload
     end
 
     context "when the user is associated with the stock location" do
-      it { is_expected.to be_able_to(:manage,  Spree::StockItem) }
-      it { is_expected.to be_able_to(:manage,  Spree::Image) }
-      it { is_expected.to be_able_to(:manage,  Spree::Product) }
+      #it { is_expected.to be_able_to(:view,  stock_item) } # WORKS
+      it { is_expected.to be_able_to(:view,  product) }
+      #it { is_expected.to be_able_to(:manage,  product_image) }
     end
 
     context "when the user is not associated with the stock location" do
