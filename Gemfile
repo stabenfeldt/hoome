@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.3'
+
 #gem 'solidus'
 gem 'solidus', github: 'solidusio/solidus'
 #gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'master'
