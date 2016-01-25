@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-#gem 'solidus'
-gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'master'
+gem 'solidus'
+#gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'master'
 gem 'solidus_auth_devise'
 
 gem 'quiet_assets', group: :development
