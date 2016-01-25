@@ -6,6 +6,7 @@ gem 'solidus_auth_devise'
 
 gem 'quiet_assets', group: :development
 
+gem 'aws-sdk', '~> 1.5.7' # Amazon Web Sevices for attachments (Must be at this version for paperclip support, not v2)
 
 gem 'cancancan', '~> 1.10'
 
