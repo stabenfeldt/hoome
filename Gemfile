@@ -79,5 +79,6 @@ end
 
 group :production do
   gem 'exception_notification'
+  gem 'rails_12factor'
 end
 
