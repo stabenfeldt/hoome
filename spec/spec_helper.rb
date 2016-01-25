@@ -17,7 +17,7 @@ end
 ENV["RAILS_ENV"] ||= 'test'
 
 begin
-  require File.expand_path("../../config/environment", __FILE__)
+  require File.expand_path("../dummy/config/environment", __FILE__)
 rescue LoadError
   $stderr.puts "Could not load dummy application. Please ensure you have run `bundle exec rake test_app`"
   exit 1
@@ -27,7 +27,7 @@ require 'rspec/rails'
 require 'database_cleaner'
 require 'ffaker'
 
-Dir["./support/**/*.rb"].sort.each { |f| require f }
+Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 
 if ENV["CHECK_TRANSLATIONS"]
   require "spree/testing_support/i18n"

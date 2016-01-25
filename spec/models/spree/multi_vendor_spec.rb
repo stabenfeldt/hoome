@@ -1,31 +1,20 @@
 require 'spec_helper'
 
-describe Spree::PermissionSets::MultiVendor do
-  let(:ability) { Spree::Ability.new(user) }
-  let(:user)    { create(:user) }
-  let(:product) { create :product }
-	let(:stock_location) { create(:stock_location_with_items) }
-	let(:stock_item) { stock_location.stock_items.order(:id).first }
+describe Spree::Product, :type => :model do
 
-  subject { ability }
+  context '#items_belonging_to_user' do
+    let!(:product)        { create(:product) }
+    #let!(:user)           { create(:user) }
+    #let!(:variant)        { product.master }
+    #let!(:stock_location) { create(:stock_location) }
+    #let!(:stock_item)     { variant.stock_items.first }
 
-  context "when activated" do
-    before do
-      user.stock_locations = [stock_location]
-      described_class.new(ability).activate!
+    it 'returns only products that belong to the same stock location as the user' do
+    #byebug
+      user.stock_location_ids = [stock_location.id]
+      product.master.stock_location_ids = [stock_location.id]
+      expect( Spree::Product.items_belonging_to_user(user).first).to eq product
     end
-
-    context "when the user is associated with the stock location" do
-      it { is_expected.to be_able_to(:manage,  Spree::StockItem) }
-      it { is_expected.to be_able_to(:manage,  Spree::Image) }
-      it { is_expected.to be_able_to(:manage,  Spree::Product) }
-    end
-
-    context "when the user is not associated with the stock location" do
-        before { user.stock_locations = [] }
-        it { is_expected.to_not be_able_to(:manage, Spree::StockItem) }
-    end
-
   end
 
 end

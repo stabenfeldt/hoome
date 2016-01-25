@@ -1,25 +1,38 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
 
-
-#gem 'solidus', :git => 'https://github.com/stabenfeldt/solidus',  :branch => 'feature/multi-vendor'
+#gem 'solidus'
 gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'master'
-#gem 'solidus', github: 'solidusio/solidus'
-
 gem 'solidus_auth_devise'
+
+gem 'quiet_assets', group: :development
+
+
+gem 'cancancan', '~> 1.10'
+
+  gem 'factory_girl_rails', '~> 4.5.0'
+group :test do
+  gem 'capybara', '~> 2.4'
+  gem 'capybara-screenshot'
+  gem 'database_cleaner', '~> 1.3'
+  gem 'email_spec'
+  gem 'launchy'
+  gem 'rspec-activemodel-mocks', '~>1.0.2'
+  gem 'rspec-collection_matchers'
+  gem 'rspec-its'
+  gem 'rspec-rails', '~> 3.3.0'
+  gem 'simplecov'
+  gem 'webmock', '1.8.11'
+  gem 'poltergeist'
+  gem 'timecop'
+  gem 'with_model'
+  gem 'rspec_junit_formatter'
+end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
-gem 'rails_12factor'
-gem 'pg'
-
-gem 'cancancan', '~> 1.10'
-
-
-
-gem 'aws-sdk', '~> 1.5.7' # Amazon Web Sevices for attachments (Must be at this version for paperclip support, not v2)
-
+# Use postgresql as the database for Active Record
+gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -44,29 +57,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 # gem 'unicorn'
 
-group :test do
-  gem 'capybara', '~> 2.4'
-  gem 'capybara-screenshot'
-  gem 'database_cleaner', '~> 1.3'
-  gem 'email_spec'
-  gem 'factory_girl_rails', '~> 4.5.0'
-  gem 'launchy'
-  gem 'rspec-activemodel-mocks', '~>1.0.2'
-  gem 'rspec-collection_matchers'
-  gem 'rspec-its'
-  gem 'rspec-rails', '~> 3.3.0'
-  gem 'simplecov'
-  gem 'webmock', '1.8.11'
-  gem 'poltergeist'
-  gem 'timecop'
-  gem 'with_model'
-  gem 'rspec_junit_formatter'
-end
+# Use Capistrano for deployment
+# gem 'capistrano-rails', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'dotenv-rails'
 end
 
 group :development do
@@ -75,11 +71,5 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-end
-
-
-group :production do
-  gem 'exception_notification'
-  gem 'newrelic_rpm'
 end
 

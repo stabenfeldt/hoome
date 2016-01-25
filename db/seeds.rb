@@ -9,3 +9,8 @@
 
 Spree::Core::Engine.load_seed if defined?(Spree::Core)
 Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
+
+
+# rake spree_auth:admin:create  # Create admin username and password
+
+

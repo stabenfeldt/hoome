@@ -1,1 +1,1 @@
-Devise.secret_key = "83338c17f78875810f4d4d3ae637f513bbaecdab49d320a8deacc65522804dc18d29b11e8e33fb206e0e1eecdf3a07c1aeac" unless Rails.env.test?
+Devise.secret_key = "e5e45a3ac0c3c51e6f273cd75d0f1273bd604cf330513614825e2811393c6eee099ee7e9b2ec21350d739880e3a7d01d4d48"

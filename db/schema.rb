@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218192121) do
+ActiveRecord::Schema.define(version: 20160124233550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,11 @@ ActiveRecord::Schema.define(version: 20151218192121) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "martin_tests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "spree_addresses", force: :cascade do |t|
     t.string   "firstname"
@@ -751,6 +756,16 @@ ActiveRecord::Schema.define(version: 20151218192121) do
   add_index "spree_shipping_method_categories", ["shipping_category_id", "shipping_method_id"], name: "unique_spree_shipping_method_categories", unique: true, using: :btree
   add_index "spree_shipping_method_categories", ["shipping_method_id"], name: "index_spree_shipping_method_categories_on_shipping_method_id", using: :btree
 
+  create_table "spree_shipping_method_stock_locations", force: :cascade do |t|
+    t.integer  "shipping_method_id"
+    t.integer  "stock_location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "spree_shipping_method_stock_locations", ["shipping_method_id"], name: "shipping_method_id_spree_sm_sl", using: :btree
+  add_index "spree_shipping_method_stock_locations", ["stock_location_id"], name: "sstock_location_id_spree_sm_sl", using: :btree
+
   create_table "spree_shipping_method_zones", force: :cascade do |t|
     t.integer  "shipping_method_id"
     t.integer  "zone_id"
@@ -768,6 +783,7 @@ ActiveRecord::Schema.define(version: 20151218192121) do
     t.string   "admin_name"
     t.integer  "tax_category_id"
     t.string   "code"
+    t.boolean  "available_to_all", default: true
   end
 
   add_index "spree_shipping_methods", ["tax_category_id"], name: "index_spree_shipping_methods_on_tax_category_id", using: :btree
@@ -820,6 +836,7 @@ ActiveRecord::Schema.define(version: 20151218192121) do
   add_index "spree_stock_items", ["deleted_at"], name: "index_spree_stock_items_on_deleted_at", using: :btree
   add_index "spree_stock_items", ["stock_location_id", "variant_id"], name: "stock_item_by_loc_and_var_id", using: :btree
   add_index "spree_stock_items", ["stock_location_id"], name: "index_spree_stock_items_on_stock_location_id", using: :btree
+  add_index "spree_stock_items", ["variant_id", "stock_location_id"], name: "index_spree_stock_items_on_variant_id_and_stock_location_id", unique: true, where: "(deleted_at IS NULL)", using: :btree
 
   create_table "spree_stock_locations", force: :cascade do |t|
     t.string   "name"
@@ -1194,4 +1211,6 @@ ActiveRecord::Schema.define(version: 20151218192121) do
   add_foreign_key "spree_product_promotion_rules", "spree_promotion_rules", column: "promotion_rule_id"
   add_foreign_key "spree_prototype_taxons", "spree_prototypes", column: "prototype_id"
   add_foreign_key "spree_prototype_taxons", "spree_taxons", column: "taxon_id"
+  add_foreign_key "spree_shipping_method_stock_locations", "spree_shipping_methods", column: "shipping_method_id"
+  add_foreign_key "spree_shipping_method_stock_locations", "spree_stock_locations", column: "stock_location_id"
 end

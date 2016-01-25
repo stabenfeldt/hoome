@@ -1,25 +1,25 @@
 PATH
   remote: solidus
   specs:
-    solidus (1.2.0.alpha)
-      solidus_api (= 1.2.0.alpha)
-      solidus_backend (= 1.2.0.alpha)
-      solidus_core (= 1.2.0.alpha)
-      solidus_frontend (= 1.2.0.alpha)
-      solidus_sample (= 1.2.0.alpha)
-    solidus_api (1.2.0.alpha)
+    solidus (1.3.0.alpha)
+      solidus_api (= 1.3.0.alpha)
+      solidus_backend (= 1.3.0.alpha)
+      solidus_core (= 1.3.0.alpha)
+      solidus_frontend (= 1.3.0.alpha)
+      solidus_sample (= 1.3.0.alpha)
+    solidus_api (1.3.0.alpha)
       rabl (>= 0.9.4.pre1, < 0.12.0)
-      solidus_core (= 1.2.0.alpha)
+      solidus_core (= 1.3.0.alpha)
       versioncake (~> 2.3.1)
-    solidus_backend (1.2.0.alpha)
-      bourbon
+    solidus_backend (1.3.0.alpha)
+      bourbon (>= 4, < 6)
       handlebars_assets
       jquery-rails
       jquery-ui-rails (~> 5.0.0)
       select2-rails (= 3.5.9.1)
-      solidus_api (= 1.2.0.alpha)
-      solidus_core (= 1.2.0.alpha)
-    solidus_core (1.2.0.alpha)
+      solidus_api (= 1.3.0.alpha)
+      solidus_core (= 1.3.0.alpha)
+    solidus_core (1.3.0.alpha)
       activemerchant (~> 1.48.0)
       acts_as_list (~> 0.3)
       awesome_nested_set (~> 3.0.1)
@@ -33,9 +33,9 @@ PATH
       kaminari (~> 0.15, >= 0.15.1)
       monetize (~> 1.1)
       paperclip (~> 4.2.0)
-      paranoia (~> 2.1.0)
+      paranoia (~> 2.1.4)
       premailer-rails
-      rails (~> 4.2.0)
+      rails (~> 4.2.5)
       ransack (~> 1.6.0)
       responders
       sprockets-rails (~> 2.0)
@@ -43,13 +43,13 @@ PATH
       stringex (~> 1.5.1)
       truncate_html (= 0.9.2)
       twitter_cldr (~> 3.0)
-    solidus_frontend (1.2.0.alpha)
+    solidus_frontend (1.3.0.alpha)
       canonical-rails (~> 0.0.4)
       jquery-rails
-      solidus_api (= 1.2.0.alpha)
-      solidus_core (= 1.2.0.alpha)
-    solidus_sample (1.2.0.alpha)
-      solidus_core (= 1.2.0.alpha)
+      solidus_api (= 1.3.0.alpha)
+      solidus_core (= 1.3.0.alpha)
+    solidus_sample (1.3.0.alpha)
+      solidus_core (= 1.3.0.alpha)
 
 GEM
   remote: https://rubygems.org/
@@ -100,11 +100,6 @@ GEM
     arel (6.0.3)
     awesome_nested_set (3.0.3)
       activerecord (>= 4.0.0, < 5)
-    aws-sdk (1.5.8)
-      httparty (~> 0.7)
-      json (~> 1.4)
-      nokogiri (>= 1.4.4)
-      uuidtools (~> 2.1)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -117,8 +112,7 @@ GEM
     cancancan (1.13.1)
     canonical-rails (0.0.11)
       rails (>= 3.1, < 5.0)
-    capybara (2.6.0)
-      addressable
+    capybara (2.5.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
@@ -155,7 +149,7 @@ GEM
       nokogiri (~> 1.6.0)
       polyglot
       rails (>= 3.1)
-    devise (3.5.4)
+    devise (3.5.5)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -166,18 +160,10 @@ GEM
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    dotenv (2.1.0)
-    dotenv-rails (2.1.0)
-      dotenv (= 2.1.0)
-      railties (>= 4.0, < 5.1)
-    email_spec (2.0.0)
-      htmlentities (~> 4.3.3)
+    email_spec (1.6.0)
       launchy (~> 2.1)
-      mail (~> 2.6.3)
+      mail (~> 2.2)
     erubis (2.7.0)
-    exception_notification (4.1.4)
-      actionmailer (~> 4.0)
-      activesupport (~> 4.0)
     execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -198,9 +184,6 @@ GEM
       tilt (~> 1.2)
     highline (1.6.21)
     htmlentities (4.3.4)
-    httparty (0.13.7)
-      json (~> 1.8)
-      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.4.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -223,16 +206,14 @@ GEM
       mime-types (>= 1.16, < 3)
     mime-types (2.99)
     mini_portile2 (2.0.0)
-    minitest (5.8.3)
+    minitest (5.8.4)
     monetize (1.4.0)
       money (~> 6.7)
     money (6.7.0)
       i18n (>= 0.6.4, <= 0.7.0)
       sixarm_ruby_unaccent (>= 1.1.1, < 2)
     multi_json (1.11.2)
-    multi_xml (0.5.5)
-    newrelic_rpm (3.14.1.311)
-    nokogiri (1.6.7.1)
+    nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
     paperclip (4.2.4)
@@ -257,6 +238,8 @@ GEM
     premailer-rails (1.9.0)
       actionmailer (>= 3, < 5)
       premailer (~> 1.7, >= 1.7.9)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rabl (0.11.8)
       activesupport (>= 2.3.14)
     rack (1.6.4)
@@ -281,11 +264,6 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.4)
-    rails_stdout_logging (0.0.4)
     railties (4.2.5)
       actionpack (= 4.2.5)
       activesupport (= 4.2.5)
@@ -390,7 +368,6 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    uuidtools (2.1.5)
     versioncake (2.3.1)
       actionpack (>= 3.2)
       activesupport (>= 3.2)
@@ -418,25 +395,21 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-sdk (~> 1.5.7)
   byebug
   cancancan (~> 1.10)
   capybara (~> 2.4)
   capybara-screenshot
   coffee-rails (~> 4.1.0)
   database_cleaner (~> 1.3)
-  dotenv-rails
   email_spec
-  exception_notification
   factory_girl_rails (~> 4.5.0)
   jbuilder (~> 2.0)
   jquery-rails
   launchy
-  newrelic_rpm
-  pg
+  pg (~> 0.15)
   poltergeist
+  quiet_assets
   rails (= 4.2.5)
-  rails_12factor
   rspec-activemodel-mocks (~> 1.0.2)
   rspec-collection_matchers
   rspec-its
@@ -456,4 +429,4 @@ DEPENDENCIES
   with_model
 
 BUNDLED WITH
-   1.11.2
+   1.10.6
