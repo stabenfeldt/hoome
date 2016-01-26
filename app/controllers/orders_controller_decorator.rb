@@ -58,11 +58,24 @@ module Spree
           @orders = @orders_with_my_products
         end
 
+    def edit
+      Rails.logger.debug "FROM APP IN EDIT\n\n"
+      require_ship_address
 
+      @order = @order.clone
 
-        # Restore dates
-        params[:q][:created_at_gt] = created_at_gt
-        params[:q][:created_at_lt] = created_at_lt
+      unless try_spree_current_user.admin?
+        my_products = Spree::Product.items_belonging_to_user(try_spree_current_user)
+        my_line_items = []
+        @order.line_items.each do |li|
+          my_line_items << li if my_products.include?(li.product)
+        end
+        @order.line_items = my_line_items
       end
+
+      unless @order.completed?
+        @order.refresh_shipment_rates
+      end
+    end
   end
 end
