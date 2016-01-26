@@ -20,3 +20,6 @@ public/spree
 .byebug_history
 
 .env
+
+spec/dummy/log/test.log
+spec/examples.txt
