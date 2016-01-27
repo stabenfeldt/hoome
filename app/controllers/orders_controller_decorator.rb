@@ -29,8 +29,6 @@ module Spree
         params[:q][:completed_at_lt] = params[:q].delete(:created_at_lt)
       end
 
-      # FIXME Only load orders belonging to @current_user
-      # o.select { |i| mine.include?(i) }
       @search = Order.accessible_by(current_ability, :index).ransack(params[:q])
 
       # lazy loading other models here (via includes) may result in an invalid query
@@ -46,6 +44,10 @@ module Spree
         page(params[:page]).
         per(params[:per_page] || Spree::Config[:orders_per_page])
 
+      ####################################################################################################
+      # MultiVendor
+      # Only fetch our products
+      #
       @orders_with_my_products = []
       my_products = Spree::Product.items_belonging_to_user(try_spree_current_user)
 
@@ -63,24 +65,5 @@ module Spree
       params[:q][:created_at_lt] = created_at_lt
     end
 
-    def edit
-      Rails.logger.debug "FROM APP IN EDIT\n\n"
-      require_ship_address
-
-      @order = @order.clone
-
-      unless try_spree_current_user.admin?
-        my_products = Spree::Product.items_belonging_to_user(try_spree_current_user)
-        my_line_items = []
-        @order.line_items.each do |li|
-          my_line_items << li if my_products.include?(li.product)
-        end
-        @order.line_items = my_line_items
-      end
-
-      unless @order.completed?
-        @order.refresh_shipment_rates
-      end
-    end
   end
 end
