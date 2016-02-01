@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/solidusio/solidus.git
-  revision: 88f2f96346b0c6a4f7ca4eee23b1425f327009b4
+  revision: ccfd595a9a263353efda5954dec20ecaff008bf3
   specs:
     solidus (1.3.0.alpha)
       solidus_api (= 1.3.0.alpha)
