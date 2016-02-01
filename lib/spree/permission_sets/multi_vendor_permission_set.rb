@@ -15,24 +15,21 @@ module Spree
     class MultiVendor < PermissionSets::Base
 
       def activate!
-        ##cannot :manage, :all
+        Rails.logger.debug  "in MultiVendor activate!"
 
-        ##cannot :all, Spree::StockItem
-        ##can    :view, Spree::StockItem, :stock_location_id => user.stock_locations.present? && user.stock_locations.first.id
-        #can    :all, Spree::StockItem
+        can    :view, Spree::StockItem, :stock_location_id => user.stock_locations.present? && user.stock_locations.first.id
 
-        ##cannot :all, Spree::Product
-        #can [:index, :create, :view], Spree::Product
+        cannot :all, Spree::Product
+        can [:index, :create, :view, :read], Spree::Product
+        can [:display, :admin, :edit, :list, :update], Spree::Product do |product|
+          product.master.stock_locations.blank? ||
+          product.master.stock_locations.first.id == user.stock_locations.first.id
+        end
 
-        #can [:display, :admin, :edit, :list, :update], Spree::Product do |product|
-        #  product.master.stock_locations.blank? ||
-        #  product.master.stock_locations.first.id == user.stock_locations.first.id
-        #end
+        # can :all, Spree.user_class
+        # cannot :all, Spree::Product
 
-        ## can :all, Spree.user_class
-        ## cannot :all, Spree::Product
-
-        #can [:manage], Spree::Image
+        can [:manage], Spree::Image
 
       end
     end
