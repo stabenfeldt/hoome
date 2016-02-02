@@ -24,6 +24,10 @@ $ r c
 Spree::Role.create(name: 'vendor')
 ```
 
+Add the vendor role to a user
+Remember to generate an API key for that user too.
+
+
 rails server
 
 *Admin account*
