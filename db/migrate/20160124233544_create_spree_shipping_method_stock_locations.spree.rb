@@ -1,7 +1,7 @@
 # This migration comes from spree (originally 20151001121454)
 class CreateSpreeShippingMethodStockLocations < ActiveRecord::Migration
   def change
-    create_table :spree_shipping_method_stock_locations do |t|
+    create_table :spree_shipping_method_stock_locations, force: true do |t|
       t.belongs_to :shipping_method
       t.belongs_to :stock_location
 
