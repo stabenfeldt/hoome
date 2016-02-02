@@ -10,7 +10,7 @@ class SpreePromoOneTwo < ActiveRecord::Migration
     end
 
 
-    add_index :spree_products_promotion_rules, [:product_id], :name => 'index_products_promotion_rules_on_product_id'
+    #add_index :spree_products_promotion_rules, [:product_id], :name => 'index_products_promotion_rules_on_product_id'
     add_index :spree_products_promotion_rules, [:promotion_rule_id], :name => 'index_products_promotion_rules_on_promotion_rule_id'
 
     create_table :spree_promotion_action_line_items, :force => true do |t|
