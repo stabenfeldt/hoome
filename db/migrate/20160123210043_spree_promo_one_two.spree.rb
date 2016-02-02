@@ -10,7 +10,10 @@ class SpreePromoOneTwo < ActiveRecord::Migration
     end
 
 
-    #remove_index  :spree_products_promotion_rules, :product_id
+    # PG::DuplicateTable: ERROR:  relation "index_products_promotion_rules_on_product_id" already exists
+    # ArgumentError: Index name 'index_spree_products_promotion_rules_on_product_id' on table 'spree_products_promotion_rules' does not exist
+    #
+    remove_index(:spree_products_promotion_rules, :name => 'index_products_promotion_rules_on_product_id')
     add_index :spree_products_promotion_rules, [:product_id], :name => 'index_products_promotion_rules_on_product_id'
     add_index :spree_products_promotion_rules, [:promotion_rule_id], :name => 'index_products_promotion_rules_on_promotion_rule_id'
 
