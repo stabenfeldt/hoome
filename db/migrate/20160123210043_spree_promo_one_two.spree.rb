@@ -9,7 +9,7 @@ class SpreePromoOneTwo < ActiveRecord::Migration
       t.references :promotion_rule
     end
 
-    drop_table 'index_products_promotion_rules_on_product_id'
+    drop_index 'index_products_promotion_rules_on_product_id'
     add_index :spree_products_promotion_rules, [:product_id], :name => 'index_products_promotion_rules_on_product_id'
     add_index :spree_products_promotion_rules, [:promotion_rule_id], :name => 'index_products_promotion_rules_on_promotion_rule_id'
 
