@@ -17,9 +17,12 @@ module Spree
       def activate!
         Rails.logger.debug  "in MultiVendor activate!"
 
-        can    :view, Spree::StockItem, :stock_location_id => user.stock_locations.present? && user.stock_locations.first.id
+        can  :all, Spree::StockItem, :stock_location_id => user.stock_locations.present? && user.stock_locations.first.id
+        can :create, StockItem
+        can :all, Spree::OptionValuesVariant
+        can :all, Spree::StockLocation
 
-        cannot :all, Spree::Product
+        #cannot :all, Spree::Product
         can [:index, :create, :view, :read], Spree::Product
         can [:display, :admin, :edit, :list, :update], Spree::Product do |product|
           product.master.stock_locations.blank? ||
