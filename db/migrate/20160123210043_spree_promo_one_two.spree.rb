@@ -34,14 +34,14 @@ class SpreePromoOneTwo < ActiveRecord::Migration
     #end
 
     #add_index :spree_promotion_rules, [:product_group_id], :name => 'index_promotion_rules_on_product_group_id'
-    add_index :spree_promotion_rules, [:user_id], :name => 'index_promotion_rules_on_user_id'
+    #add_index :spree_promotion_rules, [:user_id], :name => 'index_promotion_rules_on_user_id'
 
-    create_table :spree_promotion_rules_users, :id => false, :force => true do |t|
-      t.references :user
-      t.references :promotion_rule
-    end
+    #create_table :spree_promotion_rules_users, :id => false, :force => true do |t|
+    #  t.references :user
+    #  t.references :promotion_rule
+    #end
 
-    add_index :spree_promotion_rules_users, [:promotion_rule_id], :name => 'index_promotion_rules_users_on_promotion_rule_id'
-    add_index :spree_promotion_rules_users, [:user_id], :name => 'index_promotion_rules_users_on_user_id'
+    #add_index :spree_promotion_rules_users, [:promotion_rule_id], :name => 'index_promotion_rules_users_on_promotion_rule_id'
+    #add_index :spree_promotion_rules_users, [:user_id], :name => 'index_promotion_rules_users_on_user_id'
   end
 end
