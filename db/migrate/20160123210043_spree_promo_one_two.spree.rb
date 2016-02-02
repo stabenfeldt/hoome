@@ -25,13 +25,13 @@ class SpreePromoOneTwo < ActiveRecord::Migration
       t.string     :type
     end
 
-    create_table :spree_promotion_rules, :force => true do |t|
-      t.references :activator
-      t.references :user
-      t.references :product_group
-      t.string     :type
-      t.timestamps null: true
-    end
+    #create_table :spree_promotion_rules, :force => true do |t|
+    #  t.references :activator
+    #  t.references :user
+    #  t.references :product_group
+    #  t.string     :type
+    #  t.timestamps null: true
+    #end
 
     add_index :spree_promotion_rules, [:product_group_id], :name => 'index_promotion_rules_on_product_group_id'
     add_index :spree_promotion_rules, [:user_id], :name => 'index_promotion_rules_on_user_id'
