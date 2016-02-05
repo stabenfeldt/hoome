@@ -13,68 +13,76 @@ Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
 
 # rake spree_auth:admin:create  # Create admin username and password
 
+unless Spree::Store.where(code: 'spree').exists?
+  Spree::Store.new do |s|
+    s.code              = 'spree'
+    s.name              = 'Spree Demo Site'
+    s.url               = 'demo.spreecommerce.com'
+    s.mail_from_address = 'spree@example.com'
+  end.save!
+end
 
+Spree::Role.where(name: "vendor").first_or_create
+Spree::Role.where(name: "user").first_or_create
+Spree::Role.where(name: "admin").first_or_create
 
-i = Spree::Taxonomy.create(name: 'INNENDØRS')
-i.taxons.create(name: 'Stue')
-i.taxons.create(name: 'Kjøkken')
-i.taxons.create(name: 'Bad')
-i.taxons.create(name: 'Soverom')
+inne = Spree::Taxonomy.create(name: 'INNENDØRS')
+Spree::Taxon.create(name: 'Stue', 	 taxonomy_id: inne.id, parent: inne.root)
+Spree::Taxon.create(name: 'Kjøkken', taxonomy_id: inne.id, parent: inne.root)
+Spree::Taxon.create(name: 'Bad',     taxonomy_id: inne.id, parent: inne.root)
+Spree::Taxon.create(name: 'Soverom', taxonomy_id: inne.id, parent: inne.root)
 
-
-
-Spree::Taxonomy.create(name: 'UTENDØRS')
 
 stue = Spree::Taxonomy.create(name: 'STUE')
-stue.taxons.create(name: 'Sofaer')
-stue.taxons.create(name: 'Sofabord')
-stue.taxons.create(name: 'Sidebord')
-stue.taxons.create(name: 'Tepper')
-stue.taxons.create(name: 'Lenestoler')
-stue.taxons.create(name: 'Puff og gulvputer')
-stue.taxons.create(name: 'Puter')
-stue.taxons.create(name: 'Belysning')
+Spree::Taxon.create(name: 'Sofaer', taxonomy_id: stue.id, parent: stue.root)
+Spree::Taxon.create(name: 'Sofabord', taxonomy_id: stue.id, parent: stue.root)
+Spree::Taxon.create(name: 'Sidebord', taxonomy_id: stue.id, parent: stue.root)
+Spree::Taxon.create(name: 'Tepper', taxonomy_id: stue.id, parent: stue.root)
+Spree::Taxon.create(name: 'Lenestoler', taxonomy_id: stue.id, parent: stue.root)
+Spree::Taxon.create(name: 'Puff og gulvputer', taxonomy_id: stue.id, parent: stue.root)
+Spree::Taxon.create(name: 'Puter', taxonomy_id: stue.id, parent: stue.root)
+Spree::Taxon.create(name: 'Belysning', taxonomy_id: stue.id, parent: stue.root)
 
 spiseplassen = Spree::Taxonomy.create(name: 'SPISEPLASSEN')
-spiseplassen.taxons.create(name: 'Spisebord')
-spiseplassen.taxons.create(name: 'Spisestoler')
-spiseplassen.taxons.create(name: 'Skjenker')
-spiseplassen.taxons.create(name: 'Barmøbler')
-spiseplassen.taxons.create(name: 'Belysning')
+Spree::Taxon.create(name: 'Spisebord', taxonomy_id: spiseplassen.id, parent: spiseplassen.root)
+Spree::Taxon.create(name: 'Spisestoler', taxonomy_id: spiseplassen.id, parent: spiseplassen.root)
+Spree::Taxon.create(name: 'Skjenker', taxonomy_id: spiseplassen.id, parent: spiseplassen.root)
+Spree::Taxon.create(name: 'Barmøbler', taxonomy_id: spiseplassen.id, parent: spiseplassen.root)
+Spree::Taxon.create(name: 'Belysning', taxonomy_id: spiseplassen.id, parent: spiseplassen.root)
 
 soverom = Spree::Taxonomy.create(name: 'SOVEROM')
-soverom.taxons.create(name: 'Madrasser og senger')
-soverom.taxons.create(name: 'Opbevaring')
-soverom.taxons.create(name: 'Tekstiler')
+Spree::Taxon.create(taxonomy_id: soverom.id, parent: soverom.root, name: 'Madrasser og senger')
+Spree::Taxon.create(taxonomy_id: soverom.id, parent: soverom.root, name: 'Opbevaring')
+Spree::Taxon.create(taxonomy_id: soverom.id, parent: soverom.root, name: 'Tekstiler')
 
 Spree::Taxonomy.create(name: 'BADEROM')
 
 barnerom = Spree::Taxonomy.create(name: 'BARNEROM')
-barnerom.taxons.create(name: 'Seng')
-barnerom.taxons.create(name: 'Barnemøbler')
-barnerom.taxons.create(name: 'Barneartikler')
+Spree::Taxon.create(taxonomy_id: barnerom.id, parent: barnerom.root, name: 'Seng')
+Spree::Taxon.create(taxonomy_id: barnerom.id, parent: barnerom.root, name: 'Barnemøbler')
+Spree::Taxon.create(taxonomy_id: barnerom.id, parent: barnerom.root, name: 'Barneartikler')
 
 oppbevaring = Spree::Taxonomy.create(name: 'OPPBEVARING')
-oppbevaring.taxons.create(name: 'Oppbevaringsmoduler')
-oppbevaring.taxons.create(name: 'Hyller')
-oppbevaring.taxons.create(name: 'Mediemøbler')
-oppbevaring.taxons.create(name: 'Kommoder')
-oppbevaring.taxons.create(name: 'Småoppbevaring')
-oppbevaring.taxons.create(name: 'Skjenker')
-oppbevaring.taxons.create(name: 'Reoler')
-oppbevaring.taxons.create(name: 'Kurver')
+Spree::Taxon.create(taxonomy_id: oppbevaring.id, parent: oppbevaring.root, name: 'Oppbevaringsmoduler')
+Spree::Taxon.create(taxonomy_id: oppbevaring.id, parent: oppbevaring.root, name: 'Hyller')
+Spree::Taxon.create(taxonomy_id: oppbevaring.id, parent: oppbevaring.root, name: 'Mediemøbler')
+Spree::Taxon.create(taxonomy_id: oppbevaring.id, parent: oppbevaring.root, name: 'Kommoder')
+Spree::Taxon.create(taxonomy_id: oppbevaring.id, parent: oppbevaring.root, name: 'Småoppbevaring')
+Spree::Taxon.create(taxonomy_id: oppbevaring.id, parent: oppbevaring.root, name: 'Skjenker')
+Spree::Taxon.create(taxonomy_id: oppbevaring.id, parent: oppbevaring.root, name: 'Reoler')
+Spree::Taxon.create(taxonomy_id: oppbevaring.id, parent: oppbevaring.root, name: 'Kurver')
 
 interiør = Spree::Taxonomy.create(name: 'INTERIØR')
-interiør.taxons.create(name: 'Belysning')
-interiør.taxons.create(name: 'Tekstiler')
-interiør.taxons.create(name: 'Tepper')
-interiør.taxons.create(name: 'Dekor')
-interiør.taxons.create(name: 'Til kjøkkenet')
-interiør.taxons.create(name: 'Småmøbler')
-interiør.taxons.create(name: 'Lykter/lysestaker')
-interiør.taxons.create(name: 'Lys/servitter')
-interiør.taxons.create(name: 'Bilder/rammer')
-interiør.taxons.create(name: 'Speil')
+Spree::Taxon.create(taxonomy_id: interiør.id, parent: interiør.root, name: 'Belysning')
+Spree::Taxon.create(taxonomy_id: interiør.id, parent: interiør.root, name: 'Tekstiler')
+Spree::Taxon.create(taxonomy_id: interiør.id, parent: interiør.root, name: 'Tepper')
+Spree::Taxon.create(taxonomy_id: interiør.id, parent: interiør.root, name: 'Dekor')
+Spree::Taxon.create(taxonomy_id: interiør.id, parent: interiør.root, name: 'Til kjøkkenet')
+Spree::Taxon.create(taxonomy_id: interiør.id, parent: interiør.root, name: 'Småmøbler')
+Spree::Taxon.create(taxonomy_id: interiør.id, parent: interiør.root, name: 'Lykter/lysestaker')
+Spree::Taxon.create(taxonomy_id: interiør.id, parent: interiør.root, name: 'Lys/servitter')
+Spree::Taxon.create(taxonomy_id: interiør.id, parent: interiør.root, name: 'Bilder/rammer')
+Spree::Taxon.create(taxonomy_id: interiør.id, parent: interiør.root, name: 'Speil')
 
 
 
