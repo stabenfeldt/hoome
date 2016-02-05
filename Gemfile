@@ -80,6 +80,10 @@ group :development do
   gem 'spring'
 end
 
+group :development do
+  gem 'rubocop'
+end
+
 group :production do
   gem 'exception_notification'
   gem 'rails_12factor'
