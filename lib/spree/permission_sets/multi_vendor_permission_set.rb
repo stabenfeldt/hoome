@@ -29,8 +29,6 @@ module Spree
           product.master.stock_locations.first.id == user.stock_locations.first.id
         end
 
-        # can :all, Spree.user_class
-        # cannot :all, Spree::Product
 
         can [:manage], Spree::Image
 
@@ -39,23 +37,3 @@ module Spree
   end
 end
 
-        # p.master.stock_locations.first.id
-            #Spree::Image
-            #Spree::Variant
-            #Spree::OptionValue
-            #Spree::ProductProperty
-            #Spree::OptionType
-            #Spree::Property
-            #Spree::Prototype
-            #Spree::Taxonomy
-            #Spree::Taxon
-
-        #can [:display, :admin], Spree::Image
-        #can [:display, :admin], Spree::Variant
-        #can [:display, :admin], Spree::OptionValue
-        #can [:display, :admin], Spree::ProductProperty
-        # can [:display, :admin, :create], Spree::OptionType
-        #can [:display, :admin], Spree::Property
-        #can [:display, :admin], Spree::Prototype
-        #can [:display, :admin], Spree::Taxonomy
-        #can [:display, :admin], Spree::Taxon
