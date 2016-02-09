@@ -115,33 +115,33 @@ Spree::StockLocation.where(name: "Illum", default: false, city: "Oslo", state_id
 
 
 # Stock Locations
-illum_sl = Spree::StockLocation.where(name: "Illum", default: false,  city: "Oslo",
+@illum_sl = Spree::StockLocation.where(name: "Illum", default: false,  city: "Oslo",
                            active: true, backorderable_default: false,
                            propagate_all_variants: false, check_stock_on_transfer: true).first_or_create
 
-tannum_sl = Spree::StockLocation.where(name: "Tannum", default: false,  city: "Oslo",
+@tannum_sl = Spree::StockLocation.where(name: "Tannum", default: false,  city: "Oslo",
                            active: true, backorderable_default: false,
                            propagate_all_variants: false, check_stock_on_transfer: true).first_or_create
 
 
-default_sl = Spree::StockLocation.where(name: 'default').first_or_create
+@default_sl = Spree::StockLocation.where(name: 'default').first
 
 # Users
 Spree::User.where(email: 'admin@hoome.no').first do |user|
-  user.update_attributes(stock_location_ids: [default_sl.id])
+  user.update_attributes(stock_location_ids: [@default_sl.id])
 end
 
 Spree::User.where(email: 'illum@illum.no').first_or_create do |user|
   user.update_attributes!(password: 'illum@illum.no',
                          password_confirmation: 'illum@illum.no',
-                         stock_location_ids: [illum_sl.id]
+                         stock_location_ids: [@illum_sl.id]
                         )
 end
 
 Spree::User.where(email: 'tannum@tannum.no').first_or_create do |user|
   user.update_attributes(password: 'tannum@tannum.no',
                          password_confirmation: 'tannum@tannum.no',
-                         stock_location_ids: [tannum_sl.id]
+                         stock_location_ids: [@tannum_sl.id]
                         )
 end
 
