@@ -17,7 +17,6 @@ gem 'puma'
 gem 'cancancan', '~> 1.10'
 
 group :test do
-  gem 'guard'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'capybara', '~> 2.4'
   gem 'capybara-screenshot'
@@ -81,8 +80,12 @@ group :development do
   gem 'spring'
 end
 
-group :development do
+group :development, :test do
   gem 'rubocop'
+  #gem 'guard'
+  #gem 'guard-livereload', '~> 2.5', require: false
+  #gem 'guard-spork'
+	gem 'guard-rspec', require: false
 end
 
 group :production do
