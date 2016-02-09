@@ -8,6 +8,4 @@ Spree::User.class_eval do
       self.stock_locations.first.id
     end
 
-    attr_accessor :deleted_at
-
 end
