@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 ruby '2.2.3'
 
 #gem 'solidus'
-#gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'master'
-gem 'solidus', github: 'solidusio/solidus' #, branch: 'v1.2'
+gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'master'
+#gem 'solidus', github: 'solidusio/solidus' #, branch: 'v1.2'
 gem 'solidus_auth_devise'
 
 gem 'quiet_assets', group: :development
@@ -17,6 +17,7 @@ gem 'puma'
 gem 'cancancan', '~> 1.10'
 
 group :test do
+  gem 'guard'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'capybara', '~> 2.4'
   gem 'capybara-screenshot'
