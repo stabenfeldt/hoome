@@ -82,9 +82,6 @@ end
 
 group :development, :test do
   gem 'rubocop'
-  #gem 'guard'
-  #gem 'guard-livereload', '~> 2.5', require: false
-  #gem 'guard-spork'
 	gem 'guard-rspec', require: false
 end
 
