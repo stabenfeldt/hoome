@@ -1,3 +1,5 @@
+#rubocop:disable all
+
 module Spree
   class MultiVendorAbility
     include CanCan::Ability
@@ -6,10 +8,18 @@ module Spree
       user ||= Spree::User.new # guest user (not logged in)
       if user.admin?
         can :manage, :all
-        puts "IS admin"
-      else
-        can :read, :all
-        puts "NOT admin"
+        puts 'IS admin'
+      elsif user.vendor?
+        # Can not
+        cannot :admin, Spree.user_class
+        cannot :admin, Spree::OptionType
+        cannot :admin, Spree::Property
+        cannot :admin, Spree::Prototype
+        cannot :admin, Spree::Taxonomy
+
+        # Is allowed to
+        # TODO: Make sure one can't update other users products.
+        can :update, Spree::Product
       end
 
       if user.stock_locations.present?
