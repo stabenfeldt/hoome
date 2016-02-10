@@ -84,6 +84,9 @@ group :development, :test do
   gem 'rubocop'
   gem 'spring-commands-rspec'
 	gem 'guard-rspec', require: false
+end
+
+group :darwin, :test do
   gem 'rb-fsevent' if `uname` =~ /Darwin/
 end
 
