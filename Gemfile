@@ -86,8 +86,12 @@ group :development, :test do
 	gem 'guard-rspec', require: false
 end
 
+# And on non Mac systems run bundle install --without darwin (this only needs to be run once, the without setting
+# is remembered for future bundle installs).
+# Then for Heroku run heroku config:add BUNDLE_WITHOUT="development test darwin"
+# From http://www.johnplummer.com/rails/heroku-error-conditional-rbfsevent-gem.html
 group :darwin, :test do
-  gem 'rb-fsevent' if `uname` =~ /Darwin/
+  gem 'rb-fsevent'
 end
 
 group :production do
