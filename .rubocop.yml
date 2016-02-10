@@ -6,7 +6,7 @@ Rails:
     Enabled: true
 
 Metrics/LineLength:
-    Max: 87
+    Max: 120
 
 Style/ClassAndModuleChildren:
   Description: 'Checks style of children classes and modules.'
@@ -26,4 +26,11 @@ Style/FormatString:
 
 Style/ClosingParenthesisIndentation:
   Description: 'Checks the indentation of hanging closing parentheses.'
+  Enabled: false
+
+Metrics/AbcSize:
+  Description: >-
+                 A calculated magnitude based on number of assignments,
+                 branches, and conditions.
+  Reference: 'http://c2.com/cgi/wiki?AbcMetric'
   Enabled: false
