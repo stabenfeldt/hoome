@@ -14,8 +14,8 @@ module Spree
         cannot :admin, Spree.user_class
         cannot :admin, Spree::OptionType
         cannot :admin, Spree::Property
-        cannot :admin, Spree::Prototype
         cannot :admin, Spree::Taxonomy
+        #cannot :admin, Spree::Prototype
 
         # Is allowed to
         # TODO: Make sure one can't update other users products.
