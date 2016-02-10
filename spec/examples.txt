@@ -1,5 +1,5 @@
 example_id                                  | status | run_time        |
 ------------------------------------------- | ------ | --------------- |
-./spec/models/multi_vendor_spec.rb[1:1:1:1] | passed | 0.14731 seconds |
-./spec/models/multi_vendor_spec.rb[1:1:2:1] | passed | 0.91188 seconds |
-./spec/models/spree_user_spec.rb[1:1]       | passed | 0.00331 seconds |
+./spec/models/multi_vendor_spec.rb[1:1:1:1] | passed | 0.78016 seconds |
+./spec/models/multi_vendor_spec.rb[1:1:2:1] | passed | 0.15887 seconds |
+./spec/models/spree_user_spec.rb[1:1]       | passed | 0.02307 seconds |
