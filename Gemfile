@@ -2,15 +2,15 @@ source 'https://rubygems.org'
 
 ruby '2.2.3'
 
-#gem 'solidus'
-#gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'master'
-gem 'solidus', github: 'solidusio/solidus' #, branch: 'v1.2'
+# gem 'solidus'
+gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', branch: 'master'
+# gem 'solidus', github: 'solidusio/solidus' #, branch: 'v1.2'
 gem 'solidus_auth_devise'
 
 gem 'quiet_assets', group: :development
 
 gem 'aws-sdk', '~> 1.5.7' # Amazon Web Sevices for attachments (Must be at this version for paperclip support, not v2)
-gem 'dotenv-rails', :groups => [:development, :test]
+gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'puma'
 
