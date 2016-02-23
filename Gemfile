@@ -3,8 +3,8 @@ source 'https://rubygems.org'
 ruby '2.2.3'
 
 # gem 'solidus'
-#gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', branch: 'master'
-gem 'solidus', github: 'solidusio/solidus' #, branch: 'v1.2'
+# gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', branch: 'master'
+gem 'solidus', github: 'solidusio/solidus' # , branch: 'v1.2'
 gem 'solidus_auth_devise'
 
 gem 'quiet_assets', group: :development
@@ -34,7 +34,6 @@ group :test do
   gem 'with_model'
   gem 'rspec_junit_formatter'
 end
-
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -83,7 +82,7 @@ end
 group :development, :test do
   gem 'rubocop'
   gem 'spring-commands-rspec'
-	gem 'guard-rspec', require: false
+  gem 'guard-rspec', require: false
 end
 
 # And on non Mac systems run bundle install --without darwin (this only needs to be run once, the without setting
@@ -98,4 +97,3 @@ group :production do
   gem 'exception_notification'
   gem 'rails_12factor'
 end
-
