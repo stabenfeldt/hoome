@@ -1,3 +1,5 @@
+<% manifest_items = Spree::ShippingManifest.new(inventory_units: shipment.inventory_units.where(carton_id: nil)).items %>
+
 <div id="<%= "shipment_#{shipment.id}" %>" data-hook="admin_shipment_form-OVERRIDE">
   <% if try_spree_current_user.stock_locations.ids.include? shipment.stock_location.id %>
     <fieldset class="no-border-bottom">
