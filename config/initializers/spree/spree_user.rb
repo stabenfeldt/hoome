@@ -4,6 +4,8 @@ Spree::User.class_eval do
       self.role_users.any? { |ru| ru.role.name == 'vendor' }
     end
 
-    attr_accessor :deleted_at
+    def stock_location_id
+      self.stock_locations.first.id
+    end
 
 end

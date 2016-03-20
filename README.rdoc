@@ -14,15 +14,25 @@
 * A vendor should only see orders made to his products.
 
 ### Install
+This is how one installs Spree to a new Rails app.
+```
 bundle
-rake db:create db:migrate
-bundle exec rails g spree:install
+rake db:create
+rake railties:install:migrations
+rake db:migrate
+rails g spree:install --sample=false
+
+```
 
 **Create a vendor role**
 ```
 $ r c
 Spree::Role.create(name: 'vendor')
 ```
+
+Add the vendor role to a user
+Remember to generate an API key for that user too.
+
 
 rails server
 

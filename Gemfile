@@ -2,16 +2,17 @@ source 'https://rubygems.org'
 
 ruby '2.2.3'
 
-#gem 'solidus'
-#gem 'solidus', :path => '/Users/martins/Work/MultiVendor/solidus',  :branch => 'master'
-gem 'solidus', github: 'solidusio/solidus' #, branch: 'v1.2'
+# gem 'solidus'
+# gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', branch: 'master'
+gem 'solidus', github: 'solidusio/solidus' # , branch: 'v1.2'
 gem 'solidus_auth_devise'
 
 gem 'quiet_assets', group: :development
 
 gem 'aws-sdk', '~> 1.5.7' # Amazon Web Sevices for attachments (Must be at this version for paperclip support, not v2)
-gem 'dotenv-rails', :groups => [:development, :test]
+gem 'dotenv-rails', groups: [:development, :test]
 
+gem 'puma'
 
 gem 'cancancan', '~> 1.10'
 
@@ -33,7 +34,6 @@ group :test do
   gem 'with_model'
   gem 'rspec_junit_formatter'
 end
-
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -79,8 +79,21 @@ group :development do
   gem 'spring'
 end
 
+group :development, :test do
+  gem 'rubocop'
+  gem 'spring-commands-rspec'
+  gem 'guard-rspec', require: false
+end
+
+# And on non Mac systems run bundle install --without darwin (this only needs to be run once, the without setting
+# is remembered for future bundle installs).
+# Then for Heroku run heroku config:add BUNDLE_WITHOUT="development test darwin"
+# From http://www.johnplummer.com/rails/heroku-error-conditional-rbfsevent-gem.html
+group :darwin, :test do
+  gem 'rb-fsevent'
+end
+
 group :production do
   gem 'exception_notification'
   gem 'rails_12factor'
 end
-

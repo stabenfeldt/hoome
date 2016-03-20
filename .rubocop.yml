@@ -1,0 +1,36 @@
+# See https://github.com/bbatsov/rubocop/blob/master/config/enabled.yml
+# http://www.rubydoc.info/gems/rubocop/RuboCop and
+# https://github.com/bbatsov/ruby-style-guide
+
+Rails:
+    Enabled: true
+
+Metrics/LineLength:
+    Max: 120
+
+Style/ClassAndModuleChildren:
+  Description: 'Checks style of children classes and modules.'
+  Enabled: false
+
+Style/Documentation:
+  Description: 'Document classes and non-namespace modules.'
+  Enabled: false
+
+Metrics/ClassLength:
+  Description: 'Avoid classes longer than 100 lines of code.'
+  Enabled: false
+
+Style/FormatString:
+  Description: 'Favor `format` over `sprintf`.'
+  Enabled: false
+
+Style/ClosingParenthesisIndentation:
+  Description: 'Checks the indentation of hanging closing parentheses.'
+  Enabled: false
+
+Metrics/AbcSize:
+  Description: >-
+                 A calculated magnitude based on number of assignments,
+                 branches, and conditions.
+  Reference: 'http://c2.com/cgi/wiki?AbcMetric'
+  Enabled: false

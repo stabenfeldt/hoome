@@ -23,3 +23,5 @@ public/spree
 
 spec/dummy/log/test.log
 spec/examples.txt
+
+vendor/bundle
