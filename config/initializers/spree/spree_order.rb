@@ -9,8 +9,8 @@ Spree::Order.class_eval do
     self.products.each { |p| p.master.stock_locations_ids.include? user.stock_locations.first.id }
   end
 
-  def display_total(user)
-    if user.admin?
+  def display_total(user=nil)
+    if user.blank? or user.admin?
       sum_price = self.line_items.map { |i| i.product }.sum(&:price)
     else
       sum_price = self.line_items.select { |i| i.belongs_to_user?(user) }.sum(&:price)
