@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 ruby '2.2.3'
 
-# gem 'solidus'
-# gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', branch: 'master'
-gem 'solidus', github: 'solidusio/solidus' # , branch: 'v1.2'
+#gem 'solidus'
+#gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', branch: 'master'
+gem 'solidus', github: 'solidusio/solidus' , branch: 'master'
 gem 'solidus_auth_devise'
 
 gem 'quiet_assets', group: :development
