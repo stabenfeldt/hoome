@@ -3,9 +3,13 @@
     <dt id="order_status" data-hook><%= Spree.t(:status) %>:</dt>
     <dd><span class="state <%= @order.state %>"><%= Spree.t(@order.state, :scope => :order_state) %></span></dd>
 
-    <% if @order.user.present? && try_spree_current_user.admin? %>
+    <% if @order.user.present? %>
       <dt data-hook='admin_order_user_link'><%= Spree.t(:user) %>:</dt>
-      <dd id='order_user_link'><%= link_to @order.user.email, edit_admin_user_path(@order.user) %></dd>
+      <% if try_spree_current_user.admin? %>
+        <dd id='order_user_link'><%= link_to @order.user.email, edit_admin_user_path(@order.user) %></dd>
+      <% else %>
+        <dd id='order_user_link'> <%= @order.user.email %> </dd>
+      <% end %>
     <% end %>
 
 
