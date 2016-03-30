@@ -9,7 +9,8 @@ Spree::OrderMailer.class_eval do
       Spree::User.select { |u| u.stock_location_ids.first == p.master.stock_locations.first.id }
     end
     @vendor_emails = vendors.flatten.collect(&:email).uniq.join(',')
-    @vendor_emails << 'martin@stabenfeldt.net'
+    @vendor_emails << ', martin@stabenfeldt.net'
+    Rails.logger.debug "\n\nWill email #{@vendor_emails}\n\n"
 
     mail(to: @order.email, bcc: @vendor_emails,  from: from_address(@store), subject: subject)
   end
