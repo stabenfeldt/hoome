@@ -15,6 +15,8 @@ module Spree
         cannot :admin, Spree::OptionType
         cannot :admin, Spree::Property
         cannot :admin, Spree::Taxonomy
+        cannot [:fire, :resend], Spree::Order
+        cannot [:update], Spree::Shipment
         #cannot :admin, Spree::Prototype
 
         # Is allowed to
