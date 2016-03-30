@@ -32,7 +32,6 @@
   <% if order.line_items.exists? %>
     <fieldset class="no-border-bottom" id="order-total" data-hook="order_details_total">
       <legend><%= Spree.t(:order_total) %></legend>
-      <span>yes from Rails root </span>
       <span class="order-total"><%= order.display_total(try_spree_current_user) %></span>
     </fieldset>
   <% end %>
