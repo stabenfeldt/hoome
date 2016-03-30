@@ -10,8 +10,12 @@ Spree::Order.class_eval do
   end
 
   def display_total(user)
-    sum_users_products = self.line_items.select { |i| i.belongs_to_user?(user) }.sum(&:price)
-    Spree::Money.new(sum_users_products, { currency: self.currency })
+    if user.admin?
+      sum_price = self.line_items.map { |i| i.product }.sum(&:price)
+    else
+      sum_price = self.line_items.select { |i| i.belongs_to_user?(user) }.sum(&:price)
+    end
+    Spree::Money.new(sum_price, { currency: self.currency })
   end
 
 end
