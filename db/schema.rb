@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204191404) do
+ActiveRecord::Schema.define(version: 20160331084337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20160204191404) do
     t.boolean  "included",                                      default: false
     t.integer  "promotion_code_id"
     t.integer  "adjustment_reason_id"
-    t.boolean  "finalized"
+    t.boolean  "finalized",                                     default: false, null: false
   end
 
   add_index "spree_adjustments", ["adjustable_id", "adjustable_type"], name: "index_spree_adjustments_on_adjustable_id_and_adjustable_type", using: :btree
@@ -214,7 +214,6 @@ ActiveRecord::Schema.define(version: 20160204191404) do
     t.decimal  "additional_tax_total", precision: 10, scale: 2, default: 0.0
     t.decimal  "promo_total",          precision: 10, scale: 2, default: 0.0
     t.decimal  "included_tax_total",   precision: 10, scale: 2, default: 0.0, null: false
-    t.decimal  "pre_tax_amount",       precision: 12, scale: 4, default: 0.0, null: false
   end
 
   add_index "spree_line_items", ["order_id"], name: "index_spree_line_items_on_order_id", using: :btree
@@ -402,6 +401,8 @@ ActiveRecord::Schema.define(version: 20160204191404) do
     t.string   "currency"
     t.datetime "deleted_at"
     t.boolean  "is_default",                          default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "spree_prices", ["variant_id", "currency"], name: "index_spree_prices_on_variant_id_and_currency", using: :btree
@@ -672,7 +673,7 @@ ActiveRecord::Schema.define(version: 20160204191404) do
     t.integer  "exchange_variant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "pre_tax_amount",                  precision: 12, scale: 4, default: 0.0,  null: false
+    t.decimal  "amount",                          precision: 12, scale: 4, default: 0.0,  null: false
     t.decimal  "included_tax_total",              precision: 12, scale: 4, default: 0.0,  null: false
     t.decimal  "additional_tax_total",            precision: 12, scale: 4, default: 0.0,  null: false
     t.string   "reception_status"
@@ -727,7 +728,6 @@ ActiveRecord::Schema.define(version: 20160204191404) do
     t.decimal  "additional_tax_total", precision: 10, scale: 2, default: 0.0
     t.decimal  "promo_total",          precision: 10, scale: 2, default: 0.0
     t.decimal  "included_tax_total",   precision: 10, scale: 2, default: 0.0, null: false
-    t.decimal  "pre_tax_amount",       precision: 12, scale: 4, default: 0.0, null: false
   end
 
   add_index "spree_shipments", ["address_id"], name: "index_spree_shipments_on_address_id", using: :btree
@@ -976,9 +976,10 @@ ActiveRecord::Schema.define(version: 20160204191404) do
     t.string   "mail_from_address"
     t.string   "default_currency"
     t.string   "code"
-    t.boolean  "default",           default: false, null: false
+    t.boolean  "default",              default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cart_tax_country_iso"
   end
 
   add_index "spree_stores", ["code"], name: "index_spree_stores_on_code", using: :btree
