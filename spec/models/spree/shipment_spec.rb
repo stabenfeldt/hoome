@@ -14,23 +14,15 @@ describe Spree::Shipment, type: :model do
       shipping_rates: [
         Spree::ShippingRate.new(
           shipping_method: shipping_method,
-          selected: true,
-        ),
+          selected: true
+        )
       ],
-      stock_location: stock_location,
+      stock_location: stock_location
     )
   end
 
   let(:variant) { mock_model(Spree::Variant) }
   let(:line_item) { mock_model(Spree::LineItem, variant: variant) }
-
-  describe "precision of pre_tax_amount" do
-    let!(:line_item) { create :line_item, pre_tax_amount: 4.2051 }
-
-    it "keeps four digits of precision even when reloading" do
-      expect(line_item.reload.pre_tax_amount).to eq(4.2051)
-    end
-  end
 
   # Regression test for https://github.com/spree/spree/issues/4063
   context "number generation" do
@@ -47,7 +39,7 @@ describe Spree::Shipment, type: :model do
   it 'is backordered if one if its inventory_units is backordered' do
     shipment.inventory_units = [
       build(:inventory_unit, state: 'backordered', shipment: nil),
-      build(:inventory_unit, state: 'shipped', shipment: nil),
+      build(:inventory_unit, state: 'shipped', shipment: nil)
     ]
     expect(shipment).to be_backordered
   end
@@ -165,10 +157,12 @@ describe Spree::Shipment, type: :model do
     let(:shipment) { create(:shipment) }
     let(:shipping_method1) { create(:shipping_method) }
     let(:shipping_method2) { create(:shipping_method) }
-    let(:shipping_rates) { [
+    let(:shipping_rates) {
+      [
       Spree::ShippingRate.new(shipping_method: shipping_method1, cost: 10.00, selected: true),
       Spree::ShippingRate.new(shipping_method: shipping_method2, cost: 20.00)
-    ] }
+    ]
+    }
 
     it 'returns shipping_method from selected shipping_rate' do
       shipment.shipping_rates.delete_all
@@ -181,7 +175,7 @@ describe Spree::Shipment, type: :model do
       before { allow(shipment).to receive(:can_get_rates?){ true } }
 
       it 'should request new rates, and maintain shipping_method selection' do
-        expect(Spree::Stock::Estimator).to receive(:new).with(shipment.order).and_return(mock_estimator)
+        expect(Spree::Stock::Estimator).to receive(:new).with(no_args).and_return(mock_estimator)
         allow(shipment).to receive_messages(shipping_method: shipping_method2)
 
         expect(shipment.refresh_rates).to eq(shipping_rates)
@@ -189,7 +183,7 @@ describe Spree::Shipment, type: :model do
       end
 
       it 'should handle no shipping_method selection' do
-        expect(Spree::Stock::Estimator).to receive(:new).with(shipment.order).and_return(mock_estimator)
+        expect(Spree::Stock::Estimator).to receive(:new).with(no_args).and_return(mock_estimator)
         allow(shipment).to receive_messages(shipping_method: nil)
         expect(shipment.refresh_rates).to eq(shipping_rates)
         expect(shipment.reload.selected_shipping_rate).not_to be_nil
@@ -203,7 +197,7 @@ describe Spree::Shipment, type: :model do
       end
 
       it "can't get rates without a shipping address" do
-        shipment.order(ship_address: nil)
+        shipment.order.update_attributes!(ship_address: nil)
         expect(shipment.refresh_rates).to eq([])
       end
 
@@ -228,21 +222,30 @@ describe Spree::Shipment, type: :model do
           expect(package.on_hand.count).to eq 1
           expect(package.backordered.count).to eq 1
         end
+
+        it 'should set the shipment to itself' do
+          expect(shipment.to_package.shipment).to eq(shipment)
+        end
       end
     end
   end
 
   context "#update!" do
     shared_examples_for "immutable once shipped" do
+      before { shipment.update_columns(state: 'shipped') }
+
       it "should remain in shipped state once shipped" do
-        shipment.state = 'shipped'
-        expect(shipment).to receive(:update_columns).with(state: 'shipped', updated_at: kind_of(Time))
-        shipment.update!(order)
+        expect {
+          shipment.update!(order)
+        }.not_to change { shipment.state }
       end
     end
 
     shared_examples_for "pending if backordered" do
       it "should have a state of pending if backordered" do
+        # Set as ready so we can test for change
+        shipment.update_attributes!(state: 'ready')
+
         allow(shipment).to receive_messages(inventory_units: [mock_model(Spree::InventoryUnit, backordered?: true)])
         expect(shipment).to receive(:update_columns).with(state: 'pending', updated_at: kind_of(Time))
         shipment.update!(order)
@@ -252,6 +255,8 @@ describe Spree::Shipment, type: :model do
     context "when order cannot ship" do
       before { allow(order).to receive_messages can_ship?: false }
       it "should result in a 'pending' state" do
+        # Set as ready so we can test for change
+        shipment.update_attributes!(state: 'ready')
         expect(shipment).to receive(:update_columns).with(state: 'pending', updated_at: kind_of(Time))
         shipment.update!(order)
       end
@@ -269,12 +274,7 @@ describe Spree::Shipment, type: :model do
 
     context "when payment is not required" do
       before do
-        @original_require_payment = Spree::Config[:require_payment_to_ship]
         Spree::Config[:require_payment_to_ship] = false
-      end
-
-      after do
-        Spree::Config[:require_payment_to_ship] = @original_require_payment
       end
 
       it "should result in a 'ready' state" do
@@ -331,8 +331,6 @@ describe Spree::Shipment, type: :model do
   end
 
   context "when order is completed" do
-    after { Spree::Config.set track_inventory_levels: true }
-
     before do
       allow(order).to receive_messages completed?: true
       allow(order).to receive_messages canceled?: false
@@ -538,9 +536,14 @@ describe Spree::Shipment, type: :model do
   end
 
   context "changes shipping rate via general update" do
+    let(:store) { create :store }
     let(:order) do
       Spree::Order.create(
-        payment_total: 100, payment_state: 'paid', total: 100, item_total: 100
+        payment_total: 100,
+        payment_state: 'paid',
+        total: 100,
+        item_total: 100,
+        store: store
       )
     end
 
@@ -603,17 +606,30 @@ describe Spree::Shipment, type: :model do
   end
 
   context "#tracking_url" do
-    subject do
-      shipment.tracking_url
+    subject { shipment.tracking_url }
+
+    context "when tracking has not yet been set" do
+      it { is_expected.to be nil }
     end
 
-    before do
-      shipping_method.update!(tracking_url: "https://example.com/:tracking")
-      shipment.tracking = '1Z12345'
+    context "when tracking has been set, but a shipping method is not present" do
+      before do
+        shipment.tracking = "12345"
+        shipment.shipping_rates.clear
+      end
+
+      it { is_expected.to be nil }
     end
 
-    it "uses shipping method to determine url" do
-      is_expected.to eq("https://example.com/1Z12345")
+    context "when tracking has been set and a shipping method exists" do
+      before do
+        shipment.tracking = "12345"
+        shipment.shipping_method.update(tracking_url: "https://example.com/:tracking")
+      end
+
+      it "builds the tracking url with the shipping method" do
+        expect(subject).to eql("https://example.com/12345")
+      end
     end
   end
 
@@ -631,7 +647,7 @@ describe Spree::Shipment, type: :model do
 
     it "associates variant and order" do
       expect(inventory_units).to receive(:create).with(params)
-      unit = shipment.set_up_inventory('on_hand', variant, order, line_item)
+      shipment.set_up_inventory('on_hand', variant, order, line_item)
     end
   end
 
@@ -648,7 +664,7 @@ describe Spree::Shipment, type: :model do
   context "state changes" do
     before do
       # Must be stubbed so transition can succeed
-      allow(order).to receive_messages :paid? => true
+      allow(order).to receive_messages paid?: true
     end
 
     it "are logged to the database" do
@@ -662,13 +678,13 @@ describe Spree::Shipment, type: :model do
   end
 
   context "don't require shipment" do
-    let(:stock_location) { create(:stock_location, fulfillable: false)}
+    let(:stock_location) { create(:stock_location, fulfillable: false) }
     let(:unshippable_shipment) do
       create(
         :shipment,
         address: create(:address),
         stock_location: stock_location,
-        inventory_units: [build(:inventory_unit)],
+        inventory_units: [build(:inventory_unit)]
       )
     end
 
