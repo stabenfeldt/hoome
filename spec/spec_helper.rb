@@ -33,6 +33,8 @@ if ENV["CHECK_TRANSLATIONS"]
   require "spree/testing_support/i18n"
 end
 
+
+
 require 'spree/testing_support/factories'
 require 'spree/testing_support/preferences'
 require 'cancan/matchers'
@@ -48,6 +50,13 @@ RSpec.configure do |config|
   end
 
   config.fixture_path = File.join(File.expand_path(File.dirname(__FILE__)), "fixtures")
+
+	config.include FactoryGirl::Syntax::Methods
+	config.include Spree::Api::TestingSupport::Helpers, type: :controller
+	config.extend Spree::Api::TestingSupport::Setup, type: :controller
+	config.include Spree::TestingSupport::Preferences
+
+	config.extend WithModel
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, comment the following line or assign false
