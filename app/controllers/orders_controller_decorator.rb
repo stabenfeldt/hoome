@@ -54,11 +54,14 @@ module Spree
       unless try_spree_current_user.admin?
         @orders.each do |order|
           order.line_items.each do |li|
-            @orders_with_my_products << order if my_products.include?(li.product)
+            @orders_with_my_products << order if (my_products.include?(li.product) and order.payment_state == 'paid')
           end
         end
         @orders = @orders_with_my_products
       end
+
+      #
+      ####################################################################################################
 
       # Restore dates
       params[:q][:created_at_gt] = created_at_gt
