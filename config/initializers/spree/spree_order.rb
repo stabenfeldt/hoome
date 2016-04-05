@@ -11,9 +11,9 @@ Spree::Order.class_eval do
 
   def display_total(user=nil)
     if user.blank? or user.admin?
-      sum_price = self.line_items.map { |i| i.product }.sum(&:price)
+      sum_price = self.line_items.each.sum { |item| item.price * item.quantity }
     else
-      sum_price = self.line_items.select { |i| i.belongs_to_user?(user) }.sum(&:price)
+      sum_price = self.line_items.select { |i| i.belongs_to_user?(user) }.sum { |item| item.price * item.quantity }
     end
     Spree::Money.new(sum_price, { currency: self.currency })
   end
