@@ -1,10 +1,13 @@
 source 'https://rubygems.org'
 
 ruby '2.2.3'
+gem 'rabl'
+gem 'oj'
+
 
 #gem 'solidus'
-#gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', branch: 'master'
-gem 'solidus', github: 'solidusio/solidus' , branch: 'master'
+gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', branch: 'master'
+#gem 'solidus', github: 'solidusio/solidus' , branch: 'master'
 gem 'solidus_auth_devise'
 gem 'deface'
 
