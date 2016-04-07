@@ -259,7 +259,6 @@ GEM
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oj (2.15.0)
     orm_adapter (0.5.0)
     paperclip (4.2.4)
       activemodel (>= 3.2.0)
@@ -490,12 +489,10 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   launchy
-  oj
   pg (~> 0.15)
   poltergeist
   puma
   quiet_assets
-  rabl
   rails (= 4.2.5)
   rails_12factor
   rb-fsevent
