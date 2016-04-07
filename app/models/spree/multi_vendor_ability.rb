@@ -8,9 +8,7 @@ module Spree
       user ||= Spree::User.new # guest user (not logged in)
       if user.admin?
         can :manage, :all
-        puts 'IS admin'
       elsif user.vendor?
-        # Can not
         cannot :admin, Spree.user_class
         cannot :admin, Spree::OptionType
         cannot :admin, Spree::Property
@@ -22,6 +20,7 @@ module Spree
         # Is allowed to
         # TODO: Make sure one can't update other users products.
         can :update, Spree::Product
+        can :ship, Spree::Shipment
       end
 
       if user.stock_locations.present?
