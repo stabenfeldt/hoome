@@ -21,7 +21,7 @@ describe Spree::Order, type: :model do
           expect(order).to be_completed
         end
 
-        it "should mark the shipments as 'prepare_for_pickup'", focus: true do
+        it "should mark the shipments as 'prepare_for_pickup'" do
           order.complete!
           expect(order.shipments.first.vendor_shipping_state).to eq 'prepare_for_pickup'
         end
