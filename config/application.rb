@@ -15,14 +15,6 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-VersionCake.setup do |config|
-	config.resources do |r|
-		r.resource %r{.*}, [], [], [1]
-	end
-	config.missing_version = 1
-	config.extraction_strategy = :http_header
-end
-
 module Solidus
 	class Application < Rails::Application
 
