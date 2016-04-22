@@ -25,3 +25,4 @@ spec/dummy/log/test.log
 spec/examples.txt
 
 vendor/bundle
+solidus
