@@ -6,7 +6,6 @@ gem 'oj'
 gem 'versioncake', '~> 3.0'
 
 
-#gem 'solidus'
 gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', branch: 'master'
 #gem 'solidus', github: 'solidusio/solidus' , branch: 'master'
 gem 'solidus_auth_devise'
