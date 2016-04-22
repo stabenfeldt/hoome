@@ -46,84 +46,10 @@ password: test123
 Customice the app by modifiying config/initializers/spree.rb
 
 ### Howto add custom permission sets
-config/initializers/multi_vendor.rb:
-```
- Spree::RoleConfiguration.configure do |config|
-   config.assign_permissions :vendor, [
-     Spree::PermissionSets::OrderDisplay,
-     Spree::PermissionSets::OrderManagement,
-     Spree::PermissionSets::UserDisplay,
-     Spree::PermissionSets::StockManagement,
-     Spree::PermissionSets::ProductDisplay,
-     Spree::PermissionSets::MultiVendor
-   ]
-```
-
-Define permissions for the role:
-**lib/spree/permission_sets/multi_vendor_permission_set.rb**
-
-```
-module Spree
-  module PermissionSets
-    class MultiVendor < PermissionSets::Base
-
-      def activate!
-        can    :view, Spree::StockItem
-
-        can [:index, :create, :view], Spree::Product
-
-        can [:display, :admin, :edit, :list, :update], Spree::Product do |product|
-          product.master.stock_locations.blank? ||
-          product.master.stock_locations.first.id == user.stock_locations.first.id
-        end
-
-        can [:manage], Spree::Image
-      end
-
-    end
-  end
-end
-```
-
-### Update  spree/permission_sets.rb
-```
-add require 'spree/permission_sets/multi_vendor' to spree/permission_sets.rb to have it loaded.
-```
+See http://stackoverflow.com/questions/34980121/howto-add-a-new-role-with-a-custom-permission-set-for-solidus-spree/34982756#34982756
 
 
-### Update the Spree::User class:
-
-```
-Spree::User.class_eval do
-
-    def vendor?
-      self.role_users.any? { |ru| ru.role.name == 'vendor' }
-    end
-
-end
-```
-
-
-### Running tests
-```
-cd solidus
-$ DB=sqlite sh build.sh
-```
-
-### Running single tests
-```
-cd solidus/core
-bundle exec rspec spec/models/spree/ability_spec.rb
-```
-
-
-### Keeping updated
-*Track the origin*
-git remote add upstream git@github.com:solidusio/solidus.git
-git fetch upstream
-*Update*
-git fetch upstream
-git rebase upstream/master
-
-
-
+## We're extending the 1.2 version of Solidus.
+To work directly agains that version do:
+`git clone -b v1.2.0 git@github.com:solidusio/solidus.git solidus`
+Point Gemfile to this directory
