@@ -2,7 +2,6 @@
 
 # TODO
  - lag en plan med milepæler og inviter martin og hubert
- - deploy siden. legg på u/ p
 
 ## Goals for the Alpha version
 
@@ -30,7 +29,17 @@ $ r c
 Spree::Role.create(name: 'vendor')
 ```
 
-Add the vendor role to a user
+Add the vendor role to a user. This can be done throught the web interface.
+Update the user with correct stock_location:
+
+  %q(illum, tannum).each do |vendor|
+    vendor = Spree::User.where(email: "#{vendor}@#{vendor}.no").first
+    location = Spree::StockLocation.where(name: vendor)
+    vendor.stock_locations << illum_location
+    vendor.save
+  end
+
+
 Remember to generate an API key for that user too.
 
 
