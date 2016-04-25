@@ -9,7 +9,11 @@ module Spree
 
     def load_stock_management_data
       Rails.logger.debug "\n IN load_stock_management_data"
-      if try_spree_current_user.vendor?
+      if try_spree_current_user.admin?
+        Rails.logger.debug "\n\n User is admin\n"
+        @stock_locations = Spree::StockLocation.all
+        Rails.logger.debug "stock locations is: #{@stock_locations.inspect}"
+      elsif try_spree_current_user.vendor?
         Rails.logger.debug "\n\n User is vendor\n"
         @stock_locations = try_spree_current_user.stock_locations
         Rails.logger.debug "stock locations is: #{@stock_locations.inspect}"

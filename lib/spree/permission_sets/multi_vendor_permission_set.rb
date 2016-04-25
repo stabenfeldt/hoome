@@ -23,7 +23,10 @@ module Spree
         #can :all, Spree::OptionValuesVariant
         #can :all, Spree::StockLocation
 
-        #cannot :all, Spree::Product
+        can :manage, Spree::StockLocation do |location|
+          user.admin? || user.stock_locations.include?(location)
+        end
+
         can [:index, :create, :view, :read], Spree::Product
         can [:display, :admin, :edit, :list, :update], Spree::Product do |product|
           product.master.stock_locations.blank? ||
