@@ -32,10 +32,10 @@ Spree::Role.create(name: 'vendor')
 Add the vendor role to a user. This can be done throught the web interface.
 Update the user with correct stock_location:
 
-  %q(illum, tannum).each do |vendor|
+  %w(illum tannum).each do |vendor|
     vendor = Spree::User.where(email: "#{vendor}@#{vendor}.no").first
     location = Spree::StockLocation.where(name: vendor)
-    vendor.stock_locations << illum_location
+    vendor.stock_locations << location
     vendor.save
   end
 
