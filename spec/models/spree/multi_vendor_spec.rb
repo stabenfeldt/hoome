@@ -10,7 +10,6 @@ describe Spree::Product, :type => :model do
     #let!(:stock_item)     { variant.stock_items.first }
 
     it 'returns only products that belong to the same stock location as the user' do
-    #byebug
       user.stock_location_ids = [stock_location.id]
       product.master.stock_location_ids = [stock_location.id]
       expect( Spree::Product.items_belonging_to_user(user).first).to eq product

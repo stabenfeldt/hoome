@@ -1,3 +1,5 @@
+# TODO This does not work. Problem solved by removing v1 from all filenames, for now.
+
 VersionCake.setup do |config|
   # Versioned Resources
   # Define what server resources are supported, deprecated or obsolete
@@ -8,45 +10,7 @@ VersionCake.setup do |config|
     # r.resource %r{.*}, [], [], (1..5)
 		r.resource %r{.*}, [], [], [1]
   end
-
-  # Extraction Strategies
-  # Define how you will accept version from the request.
-  #
-  # Defaults to all:
-  #   [:http_accept_parameter, :http_header, :request_parameter, :path_parameter, :query_parameter]
-  #
-  # Custom strategy example:
-  #   You can create your own extraction strategy by giving a proc or class that responds to execute:
-  # ```
-  #     lambda {|request| request.headers["HTTP_X_MY_VERSION"] }
-  # ```
-  # or
-  # ```
-  # class ExtractorStrategy
-  #   def execute(request)
-  #     request.headers["HTTP_X_MY_VERSION"]
-  #   end
-  # end
-  # ```
-  # config.extraction_strategy = [:http_accept_parameter, :http_header, :request_parameter, :path_parameter, :query_parameter]
 	config.extraction_strategy = :http_header
-
-  # Version when no version in present in the request. If none is specified then it will error
-  # config.missing_version = 5
 	config.missing_version = 1
 
-  # Set the version key that clients will send example: `API-VERSION: 5`, api_version=2
-  # config.version_key = 'api_version'
-
-  # Enable Rails versioned filename mapping
-  # config.rails_view_versioning = true
-
-  # Response Strategies
-  # Define how (if at all) to include the version in the response. Similar to how to retrieve the
-  # version, you can set where it will be in the response. For example, the `http_header_strategy`
-  # will include it the response header under the key configured in `config.version_key`.
-  #
-  # Defaults to none
-  #
-  # config.response_strategy = [] # [:http_content_type, :http_header]
 end

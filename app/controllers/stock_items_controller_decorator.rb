@@ -12,14 +12,13 @@ module Spree
       if try_spree_current_user.admin?
         Rails.logger.debug "\n\n User is admin\n"
         @stock_locations = Spree::StockLocation.all
-        Rails.logger.debug "stock locations is: #{@stock_locations.inspect}"
       elsif try_spree_current_user.vendor?
         Rails.logger.debug "\n\n User is vendor\n"
         @stock_locations = try_spree_current_user.stock_locations
-        Rails.logger.debug "stock locations is: #{@stock_locations.inspect}"
       else
         @stock_locations = Spree::StockLocation.accessible_by(current_ability, :read)
       end
+			Rails.logger.debug "stock locations is: #{@stock_locations.inspect}"
       @stock_item_stock_locations = params[:stock_location_id].present? ? @stock_locations.where(id: params[:stock_location_id]) : @stock_locations
       @variant_display_attributes = self.class.variant_display_attributes
       @variants = Spree::Config.variant_search_class.new(params[:variant_search_term], scope: variant_scope).results
