@@ -94,7 +94,7 @@ describe Spree::Api::ShipmentsController, type: :controller do
       expect(json_response['stock_location_name']).to eq(stock_location.name)
     end
 
-    it "can make a shipment ready for pickup", focus: true do
+    it "can make a shipment ready for pickup" do
       allow_any_instance_of(Spree::Order).to receive_messages(paid?: true, complete?: true)
       api_put :ready_for_pickup
       expect(json_response).to have_attributes(attributes)
