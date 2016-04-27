@@ -13,17 +13,47 @@
 
       <% if shipment.ready? && can?(:ship, shipment) %>
 
-        <%#= form_tag(spree.ship_api_shipment_path(shipment), { method: "PUT", remote: true, id: "admin-ship-shipment" }) do %>
-          <%#= hidden_field_tag :send_mailer, false %>
-          <%#= check_box_tag :send_mailer, true, true %>
-          <%#= label_tag :send_mailer, Spree.t(:send_mailer) %>
-          <%#= submit_tag Spree.t(:ship), class: "ship-shipment-button" %>
-        <%# end %>
 
-        <%= form_tag(spree.api_ready_for_pickup_path(shipment), { method: "PUT", remote: true, id: "admin-ship-shipment" }) do %>
-          <%= hidden_field_tag :token, try_spree_current_user.spree_api_key %>
-          <%= submit_tag Spree.t(:ready_for_pickup), class: "ship-shipment-button" %>
+        <% if current_user.vendor? %>
+
+          <% if shipment.prepare_for_pickup? %>
+            <%= form_tag(spree.api_ready_for_pickup_path(shipment), { method: "PUT", remote: true, id: "admin-ship-shipment" }) do %>
+              <%= hidden_field_tag :token, try_spree_current_user.spree_api_key %>
+              <%= submit_tag Spree.t(:ready_for_pickup), class: "ship-shipment-button" %>
+            <% end %>
+          <% end %>
+
+          <% if shipment.ready_for_pickup? %>
+            <div class="alert alert-warning">
+              <p> Waiting delivery guy to collect the package </p>
+            </div>
+            <%= form_tag(spree.ship_api_shipment_path(shipment), { method: "PUT", remote: true, id: "admin-ship-shipment" }) do %>
+              <%= hidden_field_tag :send_mailer, false %>
+              <%= hidden_field_tag :token, try_spree_current_user.spree_api_key %>
+              <%= check_box_tag :send_mailer, true, true %>
+              <%= label_tag :send_mailer, Spree.t(:send_mailer) %>
+              <%= submit_tag Spree.t(:ship), class: "ship-shipment-button" %>
+            <% end %>
+
+          <% end %>
+
         <% end %>
+
+        <% if current_user.admin? %>
+
+          <% if shipment.prepare_for_pickup? %>
+            <div class="alert alert-info">
+              <p> Waiting for the vendor to prepare the package for pickup </p>
+            </div>
+          <% end %>
+
+          <% if shipment.ready_for_pickup? %>
+            <div class="alert alert-warning">
+              <p> Send a delivery guy to this vendor </p>
+            </div>
+          <% end %>
+
+      <% end %>
 
       <% end %>
     </fieldset>
