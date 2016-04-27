@@ -23,3 +23,5 @@ en:
   spree:
     ready_for_pickup: "Ready for pickup"
     collected_by_messenger: "Collected by messenger"
+    notify_buyer: "Email the buyer"
+    shipment_sent: "Shipment sent"

@@ -1,19 +1,31 @@
-Spree::Order.class_eval do
+Spree::Shipment.class_eval do
 
+  ####
+  #
+  # vendor_shipping_state can be one of these:
+  #
+  # - prepare_for_pickup
+  # - ready_for_pickup
+  # - sendt
 
-  def self.belonging_to_user(user)
-    self.products.each do |p|
-      p.master.stock_locations_ids.include? user.stock_locations.first.id
-    end
+  def prepare_for_pickup?
+    self.vendor_shipping_state == 'prepare_for_pickup'
   end
 
+  def ready_for_pickup?
+    self.vendor_shipping_state == 'ready_for_pickup'
+  end
 
-  scope :belonging_to_user, -> (user) { includes(:products)
-    .where(master: { stock_location_id: user.stock_locations.present? && user.stock_locations.first.id })
-  }
+  def ready_for_pickup!
+    self.update_attribute(:vendor_shipping_state, 'ready_for_pickup')
+  end
 
-  # scope :items_belonging_to_user, -> (user) { includes(:stock_items)
-  #   .where( spree_stock_items: { stock_location_id: user.stock_locations.present? && user.stock_locations.first.id  } )
-  # }
+  def sent!
+    self.update_attribute(:vendor_shipping_state, 'sent')
+  end
+
+  def sent?
+    self.vendor_shipping_state == 'sent'
+  end
 
 end

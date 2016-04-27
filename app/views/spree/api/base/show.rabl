@@ -4,6 +4,8 @@ attributes *shipment_attributes
 node(:order_id) { |shipment| shipment.order.number }
 node(:stock_location_name) { |shipment| shipment.stock_location.name }
 
+node(:vendor_shipping_state) { |shipment| shipment.vendor_shipping_state }
+
 child :shipping_rates => :shipping_rates do
   extends "spree/api/shipping_rates/show"
 end

@@ -4,10 +4,13 @@ describe Spree::Order, :type => :model do
   let(:order) { stub_model("Spree::Order") }
 
   context "#finalize!" do
-    let(:order) { Spree::Order.create(email: 'test@example.com', store: store) }
     let(:store) { FactoryGirl.build(:store) }
+    let(:order) { Spree::Order.create(email: 'test@example.com', store: store) }
 
     before do
+      store.save!
+      order.store_id = store.id
+      order.save!
       order.update_column :state, 'complete'
     end
 

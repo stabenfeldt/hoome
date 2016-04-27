@@ -35,6 +35,11 @@ end
 
 
 
+require './spec/support/spree/authorization_helpers'
+require 'spree/testing_support/controller_requests'
+#require 'spree/testing_support/url_helpers'
+require './spec/support/spree/url_helpers'
+
 require 'spree/testing_support/factories'
 require 'spree/testing_support/preferences'
 require 'cancan/matchers'
@@ -48,6 +53,9 @@ RSpec.configure do |config|
   config.mock_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.include Spree::TestingSupport::ControllerRequests, :type => :controller
+  config.include Spree::TestingSupport::UrlHelpers, :type => :controller
 
   config.fixture_path = File.join(File.expand_path(File.dirname(__FILE__)), "fixtures")
 

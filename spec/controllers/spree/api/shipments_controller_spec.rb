@@ -2,14 +2,17 @@ require 'spec_helper'
 
 describe Spree::Api::ShipmentsController, type: :controller do
   render_views
-  let!(:shipment) { create(:shipment, address: create(:address), inventory_units: [build(:inventory_unit, shipment: nil)]) }
-  let!(:attributes) { [:id, :tracking, :tracking_url, :number, :cost, :shipped_at, :stock_location_name, :order_id, :shipping_rates, :shipping_methods] }
+  let!(:shipment) { create(:shipment, address: create(:address),
+                           inventory_units: [build(:inventory_unit, shipment: nil)]) }
+  let!(:attributes) { [:id, :tracking, :tracking_url, :number, :cost, :shipped_at,
+                       :stock_location_name, :order_id, :shipping_rates, :shipping_methods] }
 
   before do
     stub_authentication!
   end
 
-  let!(:resource_scoping) { { id: shipment.to_param, shipment: { order_id: shipment.order.to_param } } }
+  let!(:resource_scoping) { { id: shipment.to_param, shipment:
+                            { order_id: shipment.order.to_param } } }
 
   context "as a non-admin" do
     it "cannot make a shipment ready" do
@@ -75,24 +78,7 @@ describe Spree::Api::ShipmentsController, type: :controller do
 
       it 'should create a new shipment' do
         expect(subject).to be_ok
-        puts "DEGUSDF: #{json_response}\n"
-        # expect(json_response).to have_attributes(attributes)
-
-        # FIXME
-        # DEGUSDF: {"id"=>2, "tracking"=>nil, "tracking_url"=>nil, "number"=>"H04440504512", "cost"=>"0.0",
-        # "shipped_at"=>nil, "state"=>"pending", "shipping_rates"=>[],
-        # "selected_shipping_rate"=>nil, "shipping_methods"=>[], "manifest"=>[], "order_id"=>"R646616199",
-        # "stock_location_name"=>"NY Warehouse"}
-        #
-        # Failures:
-        #
-        #   1) Spree::Api::ShipmentsController as an admin POST #create should create a new shipment
-        #      Failure/Error: expect(json_response).to have_attributes(attributes)
-        #      NoMethodError:
-        #        undefined method `keys' for #<Array:0x007faa98960128>
-        #         # expect(json_response).to have_attributes(attributes)
-        #       end
-        #     end
+        expect(json_response).to have_attributes(attributes)
       end
     end
 
@@ -108,10 +94,19 @@ describe Spree::Api::ShipmentsController, type: :controller do
       expect(json_response['stock_location_name']).to eq(stock_location.name)
     end
 
-    it "can make a shipment ready" do
+    it "can make a shipment ready for pickup" do
+      allow_any_instance_of(Spree::Order).to receive_messages(paid?: true, complete?: true)
+      api_put :ready_for_pickup
+      expect(json_response).to have_attributes(attributes)
+      expect(json_response["vendor_shipping_state"]).to eq("ready_for_pickup")
+      expect(shipment.reload.vendor_shipping_state).to eq("ready_for_pickup")
+
+    end
+
+    it "can mark a shipment ready for pickup" do
       allow_any_instance_of(Spree::Order).to receive_messages(paid?: true, complete?: true)
       api_put :ready
-      # expect(json_response).to have_attributes(attributes)
+      expect(json_response).to have_attributes(attributes)
       expect(json_response["state"]).to eq("ready")
       expect(shipment.reload.state).to eq("ready")
     end
@@ -175,7 +170,7 @@ describe Spree::Api::ShipmentsController, type: :controller do
 
       let(:params) { {} }
 
-      context "the current api user is authenticated and has orders"  do
+      context "the current api user is authenticated and has orders" do
         let(:current_api_user) { shipped_order.user }
         let(:shipped_order) { create(:shipped_order) }
 
@@ -257,7 +252,7 @@ describe Spree::Api::ShipmentsController, type: :controller do
       context "send_mailer not present" do
         it "sends the shipped shipments mailer" do
           expect { subject }.to change { ActionMailer::Base.deliveries.size }.by(1)
-          expect(ActionMailer::Base.deliveries.last.subject).to match /Shipment Notification/
+          expect(ActionMailer::Base.deliveries.last.subject).to match 'Shipment Notification'
         end
       end
 
@@ -272,7 +267,7 @@ describe Spree::Api::ShipmentsController, type: :controller do
         let(:send_mailer) { 'true' }
         it "sends the shipped shipments mailer" do
           expect { subject }.to change { ActionMailer::Base.deliveries.size }.by(1)
-          expect(ActionMailer::Base.deliveries.last.subject).to match /Shipment Notification/
+          expect(ActionMailer::Base.deliveries.last.subject).to match 'Shipment Notification'
         end
       end
     end
