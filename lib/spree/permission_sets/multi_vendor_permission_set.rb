@@ -27,6 +27,11 @@ module Spree
           user.admin? || user.stock_locations.include?(location)
         end
 
+        if user.vendor?
+          can [:ship, :update], Spree::Shipment  # if shipment belongs to user
+          # authorize! :ship, @shipment
+        end
+
         can [:index, :create, :view, :read], Spree::Product
         can [:display, :admin, :edit, :list, :update], Spree::Product do |product|
           product.master.stock_locations.blank? ||
