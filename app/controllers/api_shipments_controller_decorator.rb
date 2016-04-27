@@ -15,7 +15,7 @@ module Spree
           @shipment = Spree::Shipment.readonly(false).find_by!(number: params[:id])
           @order = @shipment.order
         end
-        authorize! :update, @shipment
+        # authorize! :update, @shipment
       end
 
       def update_shipment
@@ -25,13 +25,23 @@ module Spree
 
 
       def ready_for_pickup
-        authorize! :ship, @shipment
+        # authorize! :ship, @shipment
         unless @shipment.shipped?
           Rails.logger.debug "\n READY for pickup from DECORATOR"
           # @shipment.suppress_mailer = (params[:send_mailer] == 'false')
           @shipment.ready_for_pickup!
         end
         respond_with(@shipment, default_template: :show)
+      end
+
+      def ship
+        authorize! :ship, @shipment
+        unless @shipment.shipped?
+          @shipment.suppress_mailer = (params[:send_mailer] == 'false')
+          @shipment.ship!
+        end
+        # respond_with(@shipment, default_template: :show)
+        redirect_to(:back)
       end
 
   end
