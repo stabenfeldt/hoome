@@ -31,10 +31,8 @@ module Spree
           # @shipment.suppress_mailer = (params[:send_mailer] == 'false')
           @shipment.ready_for_pickup!
         end
-        debugger
         respond_with(@shipment, default_template: :show)
       end
-
 
   end
 end
