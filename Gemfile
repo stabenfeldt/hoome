@@ -6,7 +6,10 @@ gem 'oj'
 gem 'versioncake', '~> 3.0'
 
 
-# latest commit from the v1.3 branch
+## We're extending the 1.3 version of Solidus.
+# To work directly agains that version do:
+# `git clone -b v1.3.0 git@github.com:solidusio/solidus.git solidus`
+# Comment in the line below 
 #gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', ref: 'c0bcd30e0'
 gem 'solidus', github: 'solidusio/solidus' , branch: 'c0bcd30e0'
 
