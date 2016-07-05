@@ -4,7 +4,7 @@
 
 This describes the main functionality.
 
-**Vendor sale story**
+#### Vendor sale story
 1. Customer buys a product
 2. Customer receives an confirmation mail.
    - Vendor should also receive an email.
@@ -13,12 +13,12 @@ This describes the main functionality.
 5. Hoome sends a delivery guy to pick up the package.
 6. Customer receives the order.
 
-**Order story for Customers**
+#### Order story for Customers
 1. Buys product
 2. Receives a confirmation email.
 3. Receives the product.
 
-**Order story for Hoome admins**
+####Order story for Hoome admins
 1. Customer buys a product
 2. Hoome receives an order email.
 3. The order has the status "waiting for vendor to prepare package".
@@ -40,18 +40,12 @@ This describes the main functionality.
   The vendor prepares the product and informs the admin that it's ready to be picked up.
   The admin transfers the money the customer payed, to the vendor 14 days after the product is delivered to the customer.
 
-### Install
-This is how one installs Spree to a new Rails app.
-```
-bundle
-rake db:create
-rake railties:install:migrations
-rake db:migrate
-rails g spree:install --sample=false
+## Install
+It should be enough to clone the repo, run migrations and seed the db.
 
-```
 
-** Seed the database
+#### Seed the database
+Please read the seeds.rb for more details.
 ```
 $ rake db:seed
 ```
@@ -71,7 +65,7 @@ Update the user with correct stock_location:
   end
 
 
-Remember to generate an API key for that user too.
+Remember to generate an API key for that user in the Solidus admin interface.
 
 
 rails server
@@ -79,6 +73,12 @@ rails server
 *Admin account*
 user: admin@example.com
 password: test123
+
+
+## We're extending the 1.2 version of Solidus.
+To work directly agains that version do:
+`git clone -b v1.2.0 git@github.com:solidusio/solidus.git solidus`
+Point Gemfile to this directory
 
 
 ## Solidus
@@ -89,7 +89,3 @@ Customice the app by modifiying config/initializers/spree.rb
 See http://stackoverflow.com/questions/34980121/howto-add-a-new-role-with-a-custom-permission-set-for-solidus-spree/34982756#34982756
 
 
-## We're extending the 1.2 version of Solidus.
-To work directly agains that version do:
-`git clone -b v1.2.0 git@github.com:solidusio/solidus.git solidus`
-Point Gemfile to this directory
