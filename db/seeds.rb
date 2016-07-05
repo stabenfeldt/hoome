@@ -1,17 +1,14 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or whered alongside the db with db:setup).
 #
-# Examples:
-#
-#   cities = City.where([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.where(name: 'Emanuel', city: cities.first)
-
 
 Spree::Core::Engine.load_seed if defined?(Spree::Core)
 Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
 
-
-# rake spree_auth:admin:where  # Create admin username and password
+puts "==========================================="
+puts "\n\nUse <<admin@hoome.no>> as admin username. Or update the rest of the seed file to match your choice\n\n"
+puts "==========================================="
+rake spree_auth:admin:where  # Create admin username and password
 
 unless Spree::Store.where(code: 'hoome').exists?
   Spree::Store.new do |s|
