@@ -59,7 +59,7 @@ Add the vendor role to a user. This can be done throught the web interface.
 Remember to generate an API key for that user in the Solidus admin interface.
 
 
-## We're extending the 1.2 version of Solidus.
+## We're extending the 1.3 version of Solidus.
 To work directly agains that version do:
 `git clone -b v1.2.0 git@github.com:solidusio/solidus.git solidus`
 Point Gemfile to this directory
