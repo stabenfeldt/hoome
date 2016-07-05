@@ -55,24 +55,8 @@ This populates the db with
   - taxonomies
 
 Add the vendor role to a user. This can be done throught the web interface.
-Update the user with correct stock_location:
-
-  %w(illum tannum).each do |vendor|
-    vendor = Spree::User.where(email: "#{vendor}@#{vendor}.no").first
-    location = Spree::StockLocation.where(name: vendor)
-    vendor.stock_locations << location
-    vendor.save
-  end
-
 
 Remember to generate an API key for that user in the Solidus admin interface.
-
-
-rails server
-
-*Admin account*
-user: admin@example.com
-password: test123
 
 
 ## We're extending the 1.2 version of Solidus.
