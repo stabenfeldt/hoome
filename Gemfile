@@ -21,7 +21,7 @@ gem 'quiet_assets', group: :development
 gem 'aws-sdk', '~> 1.5.7' # Amazon Web Sevices for attachments (Must be at this version for paperclip support, not v2)
 gem 'dotenv-rails', groups: [:development, :test]
 
-gem 'puma'
+gem 'puma', '>= 3.12.6'
 
 gem 'cancancan', '~> 1.10'
 
