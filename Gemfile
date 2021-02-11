@@ -13,8 +13,8 @@ gem 'versioncake', '~> 3.0'
 #gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', ref: 'c0bcd30e0'
 gem 'solidus', github: 'solidusio/solidus' , branch: 'c0bcd30e0'
 
-gem 'solidus_auth_devise'
-gem 'deface'
+gem 'solidus_auth_devise', '>= 1.6.0'
+gem 'deface', '>= 1.0.2'
 
 gem 'quiet_assets', group: :development
 
@@ -45,7 +45,7 @@ group :test do
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '6.0.3.5'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
