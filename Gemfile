@@ -13,7 +13,7 @@ gem 'versioncake', '~> 3.0'
 #gem 'solidus', path:  '/Users/martins/Work/Hoome/solidus', ref: 'c0bcd30e0'
 gem 'solidus', github: 'solidusio/solidus' , branch: 'c0bcd30e0'
 
-gem 'solidus_auth_devise'
+gem 'solidus_auth_devise', '>= 2.5.4'
 gem 'deface'
 
 gem 'quiet_assets', group: :development
